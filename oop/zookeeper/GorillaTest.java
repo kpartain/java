@@ -6,7 +6,8 @@ public class GorillaTest {
            testGorilla.throwSomething();
            if(i % 2 != 0) {
                testGorilla.eatBananas();
-           } else if (i == 3) {
+           } 
+           if (i == 3) {
                testGorilla.climb();
            }
            System.out.println("AFTER: " + testGorilla.displayEnergy());
