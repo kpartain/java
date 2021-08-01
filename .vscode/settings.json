@@ -1,6 +1,7 @@
 {
     "java.project.sourcePaths": [
         "fundamentals/cafejava",
-        "fundamentals/alfredbot"
+        "fundamentals/alfredbot",
+        "fundamentals/hashmatique"
     ]
 }
