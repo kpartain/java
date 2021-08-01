@@ -1,7 +1,8 @@
 {
     "java.project.sourcePaths": [
+        "fundamentals/hashmatique",
         "fundamentals/cafejava",
         "fundamentals/alfredbot",
-        "fundamentals/hashmatique"
+        "oop/zookeeper"
     ]
 }
