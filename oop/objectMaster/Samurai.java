@@ -2,7 +2,7 @@ public class Samurai extends Human {
     public static int numberOfSamurai = 0;
     public Samurai(){
         this.setHealth(200);
-        numberOfSamurai++
+        numberOfSamurai++;
     }
 
     public void dealthBlow(Human targetHuman){
