@@ -1,2 +1,2 @@
-module Calculator {
+module calculatorAssignment {
 }
