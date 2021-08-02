@@ -1,14 +1,24 @@
+import java.util.ArrayList; 
+
 public class Pokedex extends AbstractPokemon {
-    private ArrayList<Pokemon> myPokemons = new ArrayList<Pokemon>();
-    public void createAPokemon(String name, int health, String type){
+
+    private ArrayList<Pokemon> myPokemons;
+
+    public Pokedex(){
+        this.myPokemons = new ArrayList<Pokemon>();
+    }
+
+    @Override
+    public Pokemon createPokemon(String name, int health, String type){
         Pokemon newPokemon = new Pokemon(name, health, type);
         myPokemons.add(newPokemon);
-    }
-    private ArrayList<Pokemon> getMyPokemons(){
-        return this.myPokemons;
-    }
+        return newPokemon;
+    };
+
+    @Override
     public void listPokemon(){
-        Pokedex thisPokedex = this.getMyPokemons();
-        listPokemon(thisPokedex);
+        for(Pokemon eachPokemon : this.myPokemons){
+            System.out.println(eachPokemon.getName());
+        }
     }
 }

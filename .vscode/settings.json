@@ -1,9 +1,10 @@
 {
     "java.project.sourcePaths": [
         "oop/zookeeper",
+        "oop/objectMaster",
         "fundamentals/hashmatique",
         "fundamentals/cafejava",
         "fundamentals/alfredbot",
-        "oop/objectMaster"
+        "oop/pokemon"
     ]
 }
