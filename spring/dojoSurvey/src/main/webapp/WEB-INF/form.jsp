@@ -23,18 +23,18 @@
 	<label>Location: <input type="text" name="location" /></label></br>
 	<!-- favlang -->
 	<p>Favorite Language: </p>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<select name="favoriteLanguage">
-  <c:forEach items="${languages}" var="language" varStatus="loop">
-    <option value="${loop.index}">
-        ${language}
-    </option>
-  </c:forEach>
-</select>
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+	<select name="favoriteLanguage">
+	  <c:forEach items="${languages}" var="language"  varStatus="loop">
+	    <option value="${loop.index}">
+	        ${language}
+	    </option>
+	  </c:forEach>
+	</select></br>
 	<!-- comment -->
 	<label for="description">Comment (optional)
-		<textarea type="text" name="comment" value=""></textarea>
-	</label>
+		</br><textarea type="text" name="comment" value=""></textarea>
+	</label></br>
 	<button class="btn btn-primary" type="submit">Button</button>
 </form>
 

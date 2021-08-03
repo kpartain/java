@@ -15,7 +15,7 @@ public class Survey {
 		add("HTML");
 		add("CSS");
 	}};
-	private ArrayList<Survey> allSurveys;
+	private static ArrayList<Survey> allSurveys = new ArrayList<Survey>();
 	
 	public Survey(String studentName, String location, String favoriteLanguage, String comment) {
 		this.studentName = studentName;
@@ -27,5 +27,9 @@ public class Survey {
 	
 	public static ArrayList<String> getDefaultLanguages() {
 		return defaultLanguages;
+	}
+	
+	public static ArrayList<Survey> listOfSurveys() {
+		return allSurveys;
 	}
 }
