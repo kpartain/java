@@ -22,6 +22,7 @@
 <h2>Dojo Location: ${location}</h2>
 <h2>Favorite Language: ${favoriteLanguage}</h2>
 <h2>Comment: ${comment}</h2>
+<a href="/" class="btn btn-primary">Go Back</a>
 </div>
 
 </body>
