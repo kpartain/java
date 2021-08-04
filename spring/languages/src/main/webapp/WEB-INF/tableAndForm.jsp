@@ -17,54 +17,58 @@
 </head>
 <body>
 <h1>TABLE AND FORM</h1>
-<!-- TABLE -->
-<table class="table">
-  <thead>
-    <tr>
-      <th scope="col">Name</th>
-      <th scope="col">Creator</th>
-      <th scope="col">Version</th>
-      <th scope="col">Action</th>
-    </tr>
-  </thead>
-  <tbody>
+<div class="m-5">
+	<!-- TABLE -->
+	<table class="table table-striped">
+	  <thead>
+	    <tr>
+	      <th scope="col">Name</th>
+	      <th scope="col">Creator</th>
+	      <th scope="col">Version</th>
+	      <th scope="col">Action</th>
+	    </tr>
+	  </thead>
+	  <tbody>
+	
+		  <c:forEach items="${allLanguages}" var="eachLanguage"  varStatus="loop">
+			   <tr>
+			   		<td>${eachLanguage.name}</td>
+			   		<td>${eachLanguage.creator}</td>
+			   		<td>${eachLanguage.version}</td>
+			   		<td>
+						<a href="/languages/delete-${eachLanguage.id}">delete</a>	| 
+						<a href="/languages/edit-${eachLanguage.id}">edit</a>	   		
+			   		</td>
+			   </tr>
+		  </c:forEach>
+	
+	  </tbody>
+	</table>
+</div>
 
-	  <c:forEach items="${allLanguages}" var="eachLanguage"  varStatus="loop">
-		   <tr>
-		   		<td>${eachLanguage.name}</td>
-		   		<td>${eachLanguage.creator}</td>
-		   		<td>${eachLanguage.version}</td>
-		   		<td>
-					<a href="/languages/delete-${eachLanguage.id}">delete</a>	| 
-					<a href="/languages/edit-${eachLanguage.id}">edit</a>	   		
-		   		</td>
-		   </tr>
-	  </c:forEach>
-
-  </tbody>
-</table>
-
+<div class="m-5 p-3">
 <!-- FORM -->
-<form method="POST" action="/languages/post-new">
-	<div class="d-flex justify-content-around">
-		<!-- name -->
-		<label> Name: </label>
-		<input type="text" name="name" />
-	</div>
-	<div class="d-flex justify-content-around">
-		<!-- Creator -->
-		<label> Creator:</label>
-		<input type="text" name="creator" />
-	</div>
-	<div class="d-flex justify-content-around">
-		<!-- Version -->
-		<label> Version:</label>
-		<input type="text" name="version" />
-	</div>
-	<div class="d-flex align-items-right">
-		<button class="btn btn-primary" type="submit">Submit</button>
-	</div>
-</form>
+	<form method="POST" action="/languages/post-new">
+		<div class="d-flex justify-content-around">
+			<!-- name -->
+			<label> Name:  </label>
+			<input type="text" name="name" class="w-50"/>
+		</div>
+		<div class="d-flex justify-content-around mt-3">
+			<!-- Creator -->
+			<label> Creator:</label>
+			<input type="text" name="creator" class="w-50"/>
+		</div>
+		<div class="d-flex justify-content-around mt-3">
+			<!-- Version -->
+			<label> Version:</label>
+			<input type="text" name="version" class="w-50"/>
+		</div>
+		<div class="d-flex align-items-end flex-column px-5 mx-5 mt-3">
+			<button class="btn btn-primary mx-5 px-5" type="submit">Submit</button>
+		</div>
+	</form>
+</div>
 
 </body>
 </html>
