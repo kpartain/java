@@ -16,8 +16,19 @@
 		<script src="/webjars/bootstrap/js/bootstrap.min.js"></script> -->
 </head>
 <body>
-
-<h1>RENDER DATA</h1>
+<h1>Show Page</h1>
+<div class="m-5">
+<!--  DASHBOARD LINK -->
+	<div class="d-flex align-items-end flex-column">
+		<a href="/languages">Dashboard</a>
+	</div>
+<!-- BODY -->
+<p class="mt-3">${language.name}</p>
+<p class="mt-3">${language.creator}</p>
+<p class="mt-3">${language.version}</p>
+<a href="/languages/edit-${language.id}" class="mt-3">Edit</a>
+<a href="languages/delete-${language.id}" class="mt-3">Delete</a>
+</div>
 
 </body>
 </html>

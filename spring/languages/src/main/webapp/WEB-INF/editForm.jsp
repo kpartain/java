@@ -17,9 +17,37 @@
 </head>
 <body>
 <h1>EDIT EXISTING LANGUAGE</h1>
-<form method="POST" action="/post-edit">
+<div class="m-5 p-3">
+<!-- LINKS -->
+	<div class="d-flex align-items-end flex-column">
+		<a href="/languages/delete-${language.id}">Delete</a>
+		<a href="/languages">Dashboard</a>
+	</div>
+<!-- FORM -->
+	<form method="POST" action="/languages/post-edit">
+		<!-- Hidden Input for ID -->
+		<input type="hidden" value="${language.id}" name="id"/>
+		<div class="d-flex justify-content-around">
+			<!-- name -->
+			<label> Name:  </label>
+			<input type="text" name="name" class="w-50" value="${language.name}"/>
+		</div>
+		<div class="d-flex justify-content-around mt-3">
+			<!-- Creator -->
+			<label> Creator:</label>
+			<input type="text" name="creator" class="w-50" value="${language.creator}"/>
+		</div>
+		<div class="d-flex justify-content-around mt-3">
+			<!-- Version -->
+			<label> Version:</label>
+			<input type="text" name="version" class="w-50" value="${language.version}"/>
+		</div>
+		<div class="d-flex align-items-end flex-column px-5 mx-5 mt-3">
+			<button class="btn btn-primary mx-5 px-5" type="submit">Submit</button>
+		</div>
+	</form>
+</div>
 
-	<button class="btn btn-primary" type="submit">Button</button>
 </form>
 
 </body>
