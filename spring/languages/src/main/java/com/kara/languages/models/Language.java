@@ -26,17 +26,18 @@ public class Language {
 	//name - required, 3-20 characters
 	@NotNull
     @Size(min = 3, max = 20)
-	@Column(name="url", nullable=false)
+	@Column(name="name", nullable=false)
     private String name;
 	
 	//creator - required, 3-20 characters - PERSISTED AS ONE COLUMN PER ASSIGNMENT
 	@NotNull
     @Size(min = 3, max = 20)
-	@Column(name="url", nullable=false)
+	@Column(name="creator", nullable=false)
     private String creator;
 	
 	//version - required
 	@NotNull
+	@Column(name="version", nullable=false)
     private String version;
 	
 	

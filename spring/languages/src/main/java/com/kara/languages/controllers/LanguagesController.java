@@ -1,18 +1,31 @@
 package com.kara.languages.controllers;
 
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.kara.languages.models.Language;
+import com.kara.languages.services.LanguageService;
+
 @Controller
 @RequestMapping("/languages")
 public class LanguagesController {
 
+	private final LanguageService languageService;
+	
+	public LanguagesController(LanguageService languageService) {
+		this.languageService = languageService;
+	}
+	
 	//table and add new form, "home"
 	@RequestMapping("")
-	public String showTableAndForm() {
+	public String showTableAndForm(Model model) {
+		List<Language> allLanguages = languageService.allLanguages();
+		model.addAttribute("allLanguages", allLanguages);
 		return "tableAndForm.jsp";
 	}
 	
