@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ page isErrorPage="true" %> 
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,38 +19,47 @@
 </head>
 <body>
 <h1>EDIT EXISTING LANGUAGE</h1>
+
 <div class="m-5 p-3">
 <!-- LINKS -->
 	<div class="d-flex align-items-end flex-column">
-		<a href="/languages/delete-${language.id}">Delete</a>
+		<a href="/languages/delete/${language.id}">Delete</a>
 		<a href="/languages">Dashboard</a>
 	</div>
 <!-- FORM -->
-	<form method="POST" action="/languages/post-edit">
-		<!-- Hidden Input for ID -->
-		<input type="hidden" value="${language.id}" name="id"/>
+	<form:form method="POST" action="/languages/${language.id}/edited" modelAttribute="language">
+		<input type="hidden" name="_method" value="put">
 		<div class="d-flex justify-content-around">
 			<!-- name -->
-			<label> Name:  </label>
-			<input type="text" name="name" class="w-50" value="${language.name}"/>
+			<p>
+			<form:label path="name"> Name:  </form:label>
+			<form:errors path="name"/>
+			<form:input path="name" class="w-50"/>
+			</p>
 		</div>
 		<div class="d-flex justify-content-around mt-3">
 			<!-- Creator -->
-			<label> Creator:</label>
-			<input type="text" name="creator" class="w-50" value="${language.creator}"/>
+			<p>
+			<form:label path="creator"> Creator:</form:label>
+			<form:errors path="creator"/>
+			<form:input path="creator" class="w-50"/>
+			</p>
 		</div>
 		<div class="d-flex justify-content-around mt-3">
 			<!-- Version -->
-			<label> Version:</label>
-			<input type="text" name="version" class="w-50" value="${language.version}"/>
+			<p>
+			<form:label path="version"> Version:</form:label>
+			<form:errors path="version"/>
+			<form:input path="version" class="w-50"/>
+			</p>
 		</div>
 		<div class="d-flex align-items-end flex-column px-5 mx-5 mt-3">
-			<button class="btn btn-primary mx-5 px-5" type="submit">Submit</button>
+			<input type="submit" value="submit" />
 		</div>
-	</form>
+	</form:form>
+	
 </div>
 
-</form>
 
 </body>
 </html>

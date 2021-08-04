@@ -26,8 +26,8 @@
 <p class="mt-3">${language.name}</p>
 <p class="mt-3">${language.creator}</p>
 <p class="mt-3">${language.version}</p>
-<a href="/languages/edit-${language.id}" class="mt-3">Edit</a>
-<a href="languages/delete-${language.id}" class="mt-3">Delete</a>
+<a href="/languages/${language.id}/edit" class="mt-3">Edit</a>
+<a href="languages/delete/${language.id}" class="mt-3">Delete</a>
 </div>
 
 </body>

@@ -1,16 +1,17 @@
 package com.kara.languages.repositories;
 
 import java.util.List;
+import com.kara.languages.models.Language;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import com.kara.languages.models.Language;
 
 @Repository
-public interface LanguageRepository extends CrudRepository<Language, Long>{
+public interface LanguageRepository extends CrudRepository<Language, Integer>{
 	List<Language> findAll();
+	Language findAllById(Integer id);
 	List<Language> findByNameContaining(String search);
 	//delete
-	//update
+	void deleteById(Integer id);
 }
