@@ -21,7 +21,7 @@ public class Language {
 //	@SequenceGenerator(name="language_generator", sequenceName="languages_id_seq", allocationSize = 1)
 //	@GeneratedValue(strategy= GenerationType.SEQUENCE, generator="language_generator")
 	@Column(name="id", nullable=false, unique=true)
-    private Long id;
+    private Integer id;
 	
 	//name - required, 3-20 characters
 	@NotNull
@@ -46,24 +46,27 @@ public class Language {
 	}
 	
 	//POJO
-	public Language(String name, String creator, String version) {
+	public Language(Integer id, String name, String creator, String version) {
+		this.id = id;
 		this.name = name;
 		this.creator = creator;
 		this.version = version;
 	}
-	
+	public Integer getId() {
+		return this.id;
+	}
 	public String getName() {
 		return this.name;
 	}
-	
 	public String getCreator() {
 		return this.creator;
 	}
-	
 	public String getVersion() {
 		return this.version;
 	}
-	
+	public void setId(Integer thisValue) {
+		this.id = thisValue;
+	}
 	public void setName(String thisValue) {
 		this.name = thisValue;
 	}
