@@ -46,8 +46,7 @@ public class Language {
 	}
 	
 	//POJO
-	public Language(Integer id, String name, String creator, String version) {
-		this.id = id;
+	public Language(String name, String creator, String version) {
 		this.name = name;
 		this.creator = creator;
 		this.version = version;

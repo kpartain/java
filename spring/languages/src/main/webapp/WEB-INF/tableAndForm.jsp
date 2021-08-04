@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>  
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -48,7 +49,7 @@
 
 <div class="m-5 p-3">
 <!-- FORM -->
-	<form method="POST" action="/languages/post-new">
+	<form:form method="POST" action="/languages/post-new" modelAttribute="language">
 		<div class="d-flex justify-content-around">
 			<!-- name -->
 			<label> Name:  </label>
@@ -67,7 +68,7 @@
 		<div class="d-flex align-items-end flex-column px-5 mx-5 mt-3">
 			<button class="btn btn-primary mx-5 px-5" type="submit">Submit</button>
 		</div>
-	</form>
+	</form:form>
 </div>
 
 </body>
