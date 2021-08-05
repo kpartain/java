@@ -5,8 +5,9 @@ import org.springframework.stereotype.Repository;
 
 import com.kara.dojosNinjas.models.Dojo;
 
-import java.util.List;
-
+@Repository
 public interface DojoRepository extends CrudRepository<Dojo, Integer>{
+
+	Dojo findDojoById(Integer id);
 
 }

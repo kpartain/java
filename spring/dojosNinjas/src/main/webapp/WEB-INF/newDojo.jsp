@@ -25,7 +25,7 @@
 		<div class="d-flex justify-content-around">
 			<!-- name -->
 			<label> Dojo:  </label>
-			<input type="text" name="dojo" class="w-50"/>
+			<input type="text" name="name" class="w-50"/>
 		</div>
 		<div class="d-flex align-items-end flex-column px-5 mx-5 mt-3">
 			<button class="btn btn-primary mx-5 px-5" type="submit">Create</button>

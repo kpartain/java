@@ -24,14 +24,15 @@
 	<form:form method="POST" action="/ninjas/new/post" modelAttribute="ninja">
 		<!-- Dojo Name -->
 		<div class="d-flex justify-content-around">
-			<select name="dojosId">
-	  			<c:forEach items="${listOfDojos}" var="dojo"  varStatus="loop">
-	    			<option value="${dojo.id}">
+			<form:select path="dojo" name="dojo">
+	  			<c:forEach items="${listOfDojos}" var="eachDojo"  varStatus="loop">
+	  				<!--  the VALUE is the entire DOJO OBJECT! -->
+	    			<form:option value="${eachDojo}">
 	    				<!-- 1.) Name format for testing  -->
-	        			${dojo.id}.) ${dojo.name}
-	    			</option>
+	        			${eachDojo.id}.) ${eachDojo.name}
+	    			</form:option>
 	  			</c:forEach>
-			</select>
+			</form:select>
 		</div>
 		
 		<!-- Firstname -->
