@@ -133,23 +133,24 @@ class SLL {
 
         return walker.value;
     }
-
-    removeVal(value) {
-        //removes the node
-        if (this.head == null) {
+    removeVal(val) {
+        if(this.head == null){
+            console.log("LIST EMPTY")
             return false;
         }
-        var walker = this.head;
-        while (walker != null) {
-            var runner = walker.next;
-            if (walker.value == value) {
-                while (runner != null) {
-                    walker = walker.next;
-                    runner = runner.next;
-                }
+
+
+        // IF THE LIST IS NOT EMPTY
+        var runner = this.head
+        while(runner.next != null){
+            if(runner.next.value == val){
+            runner.next = runner.next.next;
+            return true;
             }
-            runner = runner.next;
+            runner = runner.next; 
         }
+        return false; 
+
     }
     kthToLast(k) {
         if (this.head == null) {
