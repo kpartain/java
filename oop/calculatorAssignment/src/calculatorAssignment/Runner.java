@@ -4,13 +4,13 @@ public class Runner {
 
 	public static void main(String[] args) {
 		//Calculator I
-//		Calculator myCalculator = new Calculator();
-//		myCalculator.setOperandOne(10.5);
-//		myCalculator.setOperation('+');
-//		myCalculator.setOperandTwo(5.2);
-//		myCalculator.performOperation();
-//		System.out.println("CALCULATOR I RESULTS");
-//		System.out.println(myCalculator.getResults());
+		// Calculator myCalculator = new Calculator();
+		// myCalculator.setOperandOne(10.5);
+		// myCalculator.setOperation('+');
+		// myCalculator.setOperandTwo(5.2);
+		// myCalculator.performOperation();
+		// System.out.println("CALCULATOR I RESULTS");
+		// System.out.println(myCalculator.getResults());
 		
 		//Calculator II
 		CalculatorTwo secondCalculator = new CalculatorTwo();

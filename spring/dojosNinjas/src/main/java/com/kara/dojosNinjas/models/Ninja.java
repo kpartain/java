@@ -18,7 +18,7 @@ import javax.validation.constraints.Size;
 
 @Entity
 @Table(name="ninjas")
-public class Ninja {
+public class Ninja implements java.io.Serializable {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id", nullable=false, unique=true)
@@ -32,7 +32,7 @@ public class Ninja {
 	//last name - required
 	@NotNull
 	@Column(name="last_name", nullable=false)
-    private String lasttName;
+    private String lastName;
 	
 	//age - required
 	@NotNull
@@ -57,7 +57,7 @@ public class Ninja {
 	 
 	 public Ninja(String firstName, String lastName, Integer age, Dojo dojo) {
 		 this.firstName = firstName;
-		 this.lasttName = lastName;
+		 this.lastName = lastName;
 		 this.age = age;
 		 this.dojo = dojo;
 	 }
@@ -78,12 +78,12 @@ public class Ninja {
 		this.firstName = firstName;
 	}
 
-	public String getLasttName() {
-		return lasttName;
+	public String getLastName() {
+		return lastName;
 	}
 
-	public void setLasttName(String lasttName) {
-		this.lasttName = lasttName;
+	public void setLastName(String lasttName) {
+		this.lastName = lasttName;
 	}
 
 	public Integer getAge() {

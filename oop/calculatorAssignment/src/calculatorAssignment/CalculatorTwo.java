@@ -42,7 +42,6 @@ public class CalculatorTwo implements java.io.Serializable {
 		Double theAnswer = 0.00;
 		//while we don't have one index (when length is 1, we have our answer)
 		while(functionsToExecute.size() > 1) {
-			
 			//Multiplication
 			while(functionsToExecute.contains("*")) {
 				//store the index where * occurs each time it exists

@@ -28,8 +28,8 @@
 	  			<c:forEach items="${listOfDojos}" var="eachDojo"  varStatus="loop">
 	  				<!--  the VALUE is the entire DOJO OBJECT! -->
 	    			<form:option value="${eachDojo}">
-	    				<!-- 1.) Name format for testing  -->
-	        			${eachDojo.id}.) ${eachDojo.name}
+	    				<!-- 1 Name format for testing  -->
+	        			<c:out value="${eachDojo.name}"></c:out>
 	    			</form:option>
 	  			</c:forEach>
 			</form:select>
@@ -38,19 +38,19 @@
 		<!-- Firstname -->
 		<div class="d-flex justify-content-around">
 			<label> First name:  </label>
-			<input type="text" name="firstName" class="w-50"/>
+			<form:input path="firstName" type="text" name="firstName" class="w-50"/>
 		</div>
 		
 		<!-- Last name -->
 		<div class="d-flex justify-content-around">
 			<label>Last name:  </label>
-			<input type="text" name="lastName" class="w-50"/>
+			<form:input path="lastName" type="text" name="lastName" class="w-50"/>
 		</div>
 		
 		<!-- Age -->
 		<div class="d-flex justify-content-around">
 			<label> Age:  </label>
-			<input type="number" name="age" class="w-50"/>
+			<form:input path="age" type="number" name="age" class="w-50"/>
 		</div>
 		
 		<!-- Submit -->

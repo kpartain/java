@@ -21,22 +21,21 @@ import com.kara.dojosNinjas.services.NinjaService;
 @RequestMapping("/ninjas")
 public class NinjasController {
 	
-	@Autowired
 	private final NinjaService ninjaService;
-	
-	@Autowired
+
 	private final DojoService dojoService;
 	
+	@Autowired
 	public NinjasController(NinjaService ninjaService, DojoService dojoService) {
 		this.ninjaService = ninjaService;
 		this.dojoService = dojoService;
 	}
 	
 	//FORM
-	//FORM
 	@RequestMapping("/new")
 	public String showForm(Model model) {
 		List<Dojo> listOfDojos = dojoService.findAll();
+		model.addAttribute("ninja", new Ninja());
 		model.addAttribute("listOfDojos", listOfDojos);
 		return "newNinja.jsp";
 	}

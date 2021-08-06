@@ -19,7 +19,7 @@ import javax.validation.constraints.Size;
 
 @Entity
 @Table(name="dojos")
-public class Dojo {
+public class Dojo implements java.io.Serializable {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id", nullable=false, unique=true)

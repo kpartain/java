@@ -17,10 +17,12 @@ class SLL {
         }
         // IF THE LIST IS NOT EMPTY
         var runner = this.head;
+        var printstring = "";
         while (runner != null) {
-            console.log(runner.value);
+            printstring += runner.value + " ";
             runner = runner.next;
         }
+        console.log(printstring);
     }
 
     insertAtBack(data) {
@@ -119,11 +121,13 @@ class SLL {
 
 var testSLL = new SLL();
 testSLL.insertAtBack(3).insertAtBack(2).insertAtBack(1);
+testSLL.insertAtFront(7).insertAtFront(8).insertAtFront(9);
 console.log("BEFORE REMOVE BACK");
 testSLL.printValues();
-testSLL.insertAtFront(7).insertAtFront(8).insertAtFront(9);
 console.log("CONTAINS 1?", testSLL.contains(1));
+console.log("CONTAINS 1 RECURSIVE?", testSLL.containsRecursive(1));
 console.log("AFTER REMOVE BACK");
 testSLL.removeBack();
 testSLL.printValues();
-console.log("CONTAINS 1?", testSLL.containsRecursive(1));
+console.log("CONTAINS 1?", testSLL.contains(1));
+console.log("CONTAINS 1 RECURSIVE?", testSLL.containsRecursive(1));
