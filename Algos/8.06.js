@@ -118,15 +118,15 @@ class SLL {
         }
     }
 
-    secondToLast(){
+    secondToLast() {
         //retrieves data of 2nd to last node
-        if(this.head == null || this.head.next == null) {
+        if (this.head == null || this.head.next == null) {
             return false;
         }
 
         var walker = null;
         var runner = this.head;
-        while(runner.next != null) {
+        while (runner.next != null) {
             walker = runner;
             runner = runner.next;
         }
@@ -134,16 +134,16 @@ class SLL {
         return walker.value;
     }
 
-    removeVal(value){
+    removeVal(value) {
         //removes the node
         if (this.head == null) {
             return false;
         }
-        var walker= this.head;
+        var walker = this.head;
         while (walker != null) {
             var runner = walker.next;
             if (walker.value == value) {
-                while(runner != null){
+                while (runner != null) {
                     walker = walker.next;
                     runner = runner.next;
                 }
@@ -151,25 +151,57 @@ class SLL {
             runner = runner.next;
         }
     }
-
-    kthToLast(k){
-        //remove the kth to last, or null if there is no kth to last
-        //walker and runner
-        //runner goes all the way to the end and counts the distance
-        //walker increments by that value in a for loop
-        //then we start reassigning the nodes
+    kthToLast(k) {
+        if (this.head == null) {
+            console.log("LIST EMPTY");
+            return false;
+        }
+        if (this.head.next == null && k == 1) {
+            return this.head.value;
+        }
+        let count = 1;
+        let walker = this.head;
+        // IF THE LIST IS NOT EMPTY
+        var runner = this.head;
+        while (runner.next != null) {
+            runner = runner.next;
+            count++;
+        }
+        if (k > count) {
+            return null;
+        }
+        for (let i = 0; i < count - k; i++) {
+            walker = walker.next;
+        }
+        return walker.value;
     }
 }
 
-var testSLL = new SLL();
-testSLL.insertAtBack(3).insertAtBack(2).insertAtBack(1);
-testSLL.insertAtFront(7).insertAtFront(8).insertAtFront(9);
-console.log("BEFORE REMOVE BACK");
-testSLL.printValues();
-console.log("CONTAINS 1?", testSLL.contains(1));
-console.log("CONTAINS 1 RECURSIVE?", testSLL.containsRecursive(1));
-console.log("AFTER REMOVE BACK");
-testSLL.removeBack();
-testSLL.printValues();
-console.log("CONTAINS 1?", testSLL.contains(1));
-console.log("CONTAINS 1 RECURSIVE?", testSLL.containsRecursive(1));
+var newList3 = new SLL();
+newList3.insertAtFront(100);
+newList3.insertAtFront(200);
+newList3.insertAtFront(300);
+newList3.insertAtFront(400);
+newList3.insertAtFront(500);
+newList3.insertAtFront(600);
+newList3.insertAtFront(700);
+//newList3.printValues();
+console.log("\n\n");
+newList3.removeAtFront();
+newList3.printValues();
+
+console.log(newList3.containsRecursive(100));
+console.log(newList3.containsRecursive(500));
+console.log(newList3.recursiveMax());
+
+console.log(newList3.secondToLast());
+console.log(newList3.removeVal(200));
+newList3.printValues();
+
+newList3.printValues();
+console.log(newList3.kthToLast(1));
+console.log(newList3.kthToLast(2));
+console.log(newList3.kthToLast(3));
+console.log(newList3.kthToLast(7));
+console.log(newList3.kthToLast(8));
+console.log(newList3.average());
