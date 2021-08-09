@@ -23,7 +23,7 @@
 	<!--  LEFT: Registration -->
 	<div class="m-5 w-50">
 	
-	<form:form method="POST" action="/registration" modelAttribute="user">
+	<form:form method="POST" action="/registration-post" modelAttribute="user">
 	
 		<fieldset class="border p-2">
 			    <legend class="w-auto">Register:</legend>
@@ -51,13 +51,13 @@
     
     <!--  RIGHT: Login -->
     <div class="m-5 w-50">
-    <form method="post" action="/login">
+    <form method="post" action="/login-post">
     
     <fieldset class="border p-2">
 	    <legend class="w-auto">Login:</legend>
 	    
 	    
-	    	<p><c:out value="${error}" /></p>
+	    	<p><c:out value="${loginerror}" /></p>
 	    
 	        <p class="d-flex justify-content-between gap-2 w-100">
 	            <label for="email">Email</label>
