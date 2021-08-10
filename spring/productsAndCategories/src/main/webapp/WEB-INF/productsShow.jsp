@@ -26,7 +26,7 @@
 	<div class="m-5 w-50">
 	<h2>Categories:</h2> <!-- Categories that the product currently has -->
 	<ul>
-		<c:forEach items="${allCategories}" var="eachCategory" varStatus="loop">
+		<c:forEach items="${categoriesOfProduct}" var="eachCategory" varStatus="loop">
 			<li>
 				<c:out value="${eachCategory.name}" />
 			</li>
