@@ -38,7 +38,7 @@
     <div class="m-5 w-50 d-flex m-5 justify-content-between gap-5">
 	    <div><p>Add Product</p></div>
 	    <div> <!--  Double check syntax - should we allow multiple selections?? -->
-		    <form:form method="PUT" action="/add-product-to-category/{category.id}" modelAttribute="product">
+		    <form:form method="PUT" action="/add-product-to-category/{category.id}" modelAttribute="category">
 				<form:select path="categories" name="categories">
 			  		<c:forEach items="${productsNotInCategory}" var="eachProduct"  varStatus="loop"> <!-- currently doesn't have -->
 			  			<!--  the VALUE is the entire DOJO OBJECT! -->
