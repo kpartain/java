@@ -60,11 +60,55 @@ class SLQueue {
     // equals
     // Write a method on the Queue class that, given another queue, will return whether they are equal (same items in same order).
     // Do not use any extra array or objects as storage. Do not alter (pop from or push into) either queue.
-    equals(secondQ) {}
+    equals(secondQ) {
+        if (secondQ instanceof SLQueue) {
+            if (
+                secondQ.size != this.size ||
+                this.head.value != secondQ.head.value ||
+                this.tail.value != secondQ.tail.value
+            ) {
+                return false;
+            }
+        } else if (secondQ instanceof SLStack) {
+            if (
+                secondQ.length != this.size ||
+                this.head.value != secondQ.head.value
+            ) {
+                return false;
+            }
+        }
+
+        let runner = this.head;
+        let chaser = secondQ.head;
+        while (runner != null) {
+            if (runner.value != chaser.value) {
+                return false;
+            }
+            runner = runner.next;
+            chaser = chaser.next;
+        }
+        return true;
+    }
     // isPalindrome
-    // Write a method on the Queue class that returns whether or not the queue is a palindrome Use only 1 stack as additional storage
-    //(no additional arrays / objects).
-    isPalindrome() {}
+    // Write a method on the Queue class that returns whether or not the queue is a palindrome
+    // Use only 1 stack as additional storage (no additional arrays / objects).
+    isPalindrome() {
+        //The first and last values of the queue must be the same to be palindrome
+        if (this.tail.value != this.head.value) {
+            return false;
+        }
+
+        //Create new stack
+        let newStack = new SLStack();
+        let runner = this.head;
+        while (runner != null) {
+            newStack.push(runner.value);
+            runner = runner.next;
+        }
+        newStack.printPretty();
+
+        return this.equals(newStack);
+    }
 }
 
 /* 
@@ -91,3 +135,9 @@ q3.enqueue("a");
 q3.enqueue("b");
 q3.enqueue("c");
 console.log(q3.isPalindrome()); // SHOULD RETURN FALSE
+
+var q4 = new SLQueue();
+q4.enqueue("a");
+q4.enqueue("b");
+q4.enqueue("a");
+console.log(q4.isPalindrome()); // SHOULD RETURN FALSE
