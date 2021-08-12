@@ -69,7 +69,7 @@ public class LanguagesController {
 	}
 	
 	//post from edit-language
-	@RequestMapping(value="/{language.id}", method=RequestMethod.POST)
+	@RequestMapping(value="/{id}", method=RequestMethod.POST)
 	public String updateExistingLanguage(@Valid @ModelAttribute("language") Language language, BindingResult result, Model model) {
 		//use setters to update the existing language
 		if (result.hasErrors()) {
