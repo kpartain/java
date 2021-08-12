@@ -19,47 +19,48 @@
 </head>
 <body>
 <h1>EDIT EXISTING LANGUAGE</h1>
-
 <div class="m-5 p-3">
+
 <!-- LINKS -->
 	<div class="d-flex align-items-end flex-column">
 		<a href="/languages/delete/${language.id}">Delete</a>
 		<a href="/languages">Dashboard</a>
 	</div>
 <!-- FORM -->
+
+<div>
 	<form:form method="POST" action="/languages/${language.id}/edited" modelAttribute="language">
 		<input type="hidden" name="_method" value="put">
-		<div class="d-flex justify-content-around">
+		<div class="d-flex mt-3 justify-content-between">
 			<!-- name -->
-			<p>
-			<form:label path="name"> Name:  </form:label>
-			<form:errors path="name"/>
-			<form:input path="name" class="w-50"/>
-			</p>
+			<form:label path="name">
+				<p class="w-30">Name <form:errors path="name" class="text-danger"/></p>
+			</form:label>
+			<form:input class="w-50" path="name"/>
 		</div>
-		<div class="d-flex justify-content-around mt-3">
+		
+		<div class="d-flex mt-3 justify-content-between">
 			<!-- Creator -->
-			<p>
-			<form:label path="creator"> Creator:</form:label>
-			<form:errors path="creator"/>
-			<form:input path="creator" class="w-50"/>
-			</p>
+			<form:label path="creator">
+					<p class="w-30">Creator <form:errors path="creator" class="text-danger"/></p>
+			</form:label>
+			<form:input class="w-50" path="creator"/>
 		</div>
-		<div class="d-flex justify-content-around mt-3">
+		
+		<div class="d-flex mt-3 justify-content-between">
 			<!-- Version -->
-			<p>
-			<form:label path="version"> Version:</form:label>
-			<form:errors path="version"/>
-			<form:input path="version" class="w-50"/>
-			</p>
+			<form:label path="version">
+				<p class="w-30">Version <form:errors path="version" class="text-danger"/></p>
+			</form:label>
+			<form:input class="w-50" path="version"/>
 		</div>
-		<div class="d-flex align-items-end flex-column px-5 mx-5 mt-3">
-			<input type="submit" value="submit" />
+		
+		<div class="d-flex align-items-end flex-column mt-3">
+			<button class="btn btn-primary px-5" type="submit">Submit</button>
 		</div>
 	</form:form>
-	
 </div>
 
-
+</div>
 </body>
 </html>

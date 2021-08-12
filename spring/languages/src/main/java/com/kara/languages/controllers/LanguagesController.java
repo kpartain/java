@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -26,9 +27,14 @@ public class LanguagesController {
 		this.languageService = languageService;
 	}
 	
+	@RequestMapping("/")
+	public String redirectToLanguages() {
+		
+		return "redirect:/languages";
+	}
 	//table and add new form, "home"
 	@RequestMapping("")
-	public String showTableAndForm(Model model) {
+	public String showTableAndForm(Model model, @ModelAttribute("language") Language language) {
 		List<Language> allLanguages = languageService.allLanguages();
 		model.addAttribute("allLanguages", allLanguages);
 		return "tableAndForm.jsp";
@@ -36,10 +42,12 @@ public class LanguagesController {
 	
 	//post from languages, new Language persists
 	//?? How to get ID back to dynamically redirect to here 
-	@RequestMapping(value="/post-new", method=RequestMethod.POST)
-	public String persistNewLanguage(@Valid @ModelAttribute("language") Language language, BindingResult result) {
+	@RequestMapping(value ="", method=RequestMethod.POST)
+	public String persistNewLanguage(@Valid @ModelAttribute("language") Language language, BindingResult result, Model model) {
 		//make a new language and get its id
 		if(result.hasErrors()) {
+			List<Language> allLanguages = languageService.allLanguages();
+			model.addAttribute("allLanguages", allLanguages);
 			return "tableAndForm.jsp";
 		} else {
 			languageService.createLanguage(language);

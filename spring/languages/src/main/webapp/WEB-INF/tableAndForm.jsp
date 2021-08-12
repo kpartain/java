@@ -47,26 +47,36 @@
 	</table>
 </div>
 
-<div class="m-5 p-3">
+<div class="m-5 p-5">
 <!-- FORM -->
-	<form:form method="POST" action="/languages/post-new" modelAttribute="language">
-		<div class="d-flex justify-content-around">
+	<form:form method="POST" action="/languages" modelAttribute="language">
+	
+		<div class="d-flex mt-3 justify-content-between">
 			<!-- name -->
-			<label> Name:  </label>
-			<input type="text" name="name" class="w-50"/>
+			<form:label path="name">
+				<p class="w-30">Name <form:errors path="name" class="text-danger"/></p>
+			</form:label>
+			<form:input class="w-50" path="name"/>
 		</div>
-		<div class="d-flex justify-content-around mt-3">
+		
+		<div class="d-flex mt-3 justify-content-between">
 			<!-- Creator -->
-			<label> Creator:</label>
-			<input type="text" name="creator" class="w-50"/>
+			<form:label path="creator">
+					<p class="w-30">Creator <form:errors path="creator" class="text-danger"/></p>
+			</form:label>
+			<form:input class="w-50" path="creator"/>
 		</div>
-		<div class="d-flex justify-content-around mt-3">
+		
+		<div class="d-flex mt-3 justify-content-between">
 			<!-- Version -->
-			<label> Version:</label>
-			<input type="text" name="version" class="w-50"/>
+			<form:label path="version">
+				<p class="w-30">Version <form:errors path="version" class="text-danger"/></p>
+			</form:label>
+			<form:input class="w-50" path="version"/>
 		</div>
-		<div class="d-flex align-items-end flex-column px-5 mx-5 mt-3">
-			<button class="btn btn-primary mx-5 px-5" type="submit">Submit</button>
+		
+		<div class="d-flex align-items-end flex-column mt-3">
+			<button class="btn btn-primary px-5" type="submit">Submit</button>
 		</div>
 	</form:form>
 </div>
