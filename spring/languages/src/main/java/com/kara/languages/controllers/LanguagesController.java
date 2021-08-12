@@ -91,7 +91,7 @@ public class LanguagesController {
 	//delete
 	//post from edit-language
 	@RequestMapping(value="delete/{id}")
-	public String persistNewLanguage(@PathVariable("id") Integer id) {
+	public String deleteThisLanguage(@PathVariable("id") Integer id) {
 		//delete by ID
 		languageService.deleteById(id);
 		//return to dashboard
