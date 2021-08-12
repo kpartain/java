@@ -1,37 +1,59 @@
-class Stack {
-    constructor(items = []) {
-        this.items = items;
+class SLNode {
+    constructor(value) {
+        this.value = value;
+        this.next = null;
     }
-    push(item) {
-        this.items[this.items.length] = item;
+}
+
+class SLStack {
+    constructor() {
+        this.head = null;
+        this.length = 0;
     }
-    // Returns undefined if empty
-    pop() {
-        var returnedLastIndex = this.items[this.items.length - 1];
-        this.items.pop();
-        return returnedLastIndex;
+
+    isEmpty(){
+      return this.head == null;
     }
-    // aka top, returns undefined if empty
-    peek() {
-        return this.items[this.items.length - 1];
+    push(value){
+      var new_node = new SLNode(value);
+      new_node.next = this.head;
+      this.head = new_node;
+      this.length++;
     }
-    isEmpty() {
-        if (this.items.length == 0) {
-            return true;
-        } else {
-            return false;
-        }
+    pop(){
+      if (!this.head) {
+        return null;
+      }
+      var removed = this.head.value;
+      this.head = this.head.next;
+      this.length--;
+      return removed;
     }
-    size() {
-        return this.items.length;
+
+    size(){
+      return this.length;
     }
-    print() {
-        var returnString = "START-- ";
-        for (var i = 0; i < this.items.length; i++) {
-            returnString += this.items[i] + " -- ";
-        }
-        returnString += "END";
-        console.log(returnString);
+
+    peek(){
+      return this.head? this.head.value: null;
+    }
+    printPretty() {
+      let runner = this.head;
+      let printString = "~ SLStack ~ HEAD--(";
+      while (runner && runner.next) {
+        printString+= `${runner.value})->(`;
+        runner = runner.next;
+      }
+      printString+=`${runner.value})->null\n`;
+      console.log(printString);
+    }
+    reverse() {
+      var tempStack = new SLStack();
+      while(this.head) {
+        tempStack.push(this.pop());
+      }
+      this.head = tempStack.head;
+      this.length = tempStack.length;
     }
     /** Methods will be in the STACK class Returns a new stack that is copy of the original stack.
      * Retain the original order. You may create extra temp SLStacks and/or SLQueues as storage.
@@ -42,7 +64,9 @@ class Stack {
      * Rearranges the stack so that numbers > 0 are on the top and any negatives are on the bottom
      * Retain the order of the positives and negatives Use extra stacks and/or queues as storage.
      */
-    partitionPositives() {}
+    partitionPositives() {
+        
+    }
 }
 
 var s1 = new SLStack();
