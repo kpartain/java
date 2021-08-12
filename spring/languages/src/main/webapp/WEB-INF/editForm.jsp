@@ -31,31 +31,31 @@
 <div>
 	<form:form method="POST" action="/languages/${language.id}/edited" modelAttribute="language">
 		<input type="hidden" name="_method" value="put">
-		<div class="d-flex mt-3 justify-content-between">
+		<div class="d-flex mt-3 justify-content-between  mx-5">
 			<!-- name -->
 			<form:label path="name">
 				<p class="w-30">Name <form:errors path="name" class="text-danger"/></p>
 			</form:label>
-			<form:input class="w-50" path="name"/>
+			<form:input class="w-50" path="name" placeholder="name"/>
 		</div>
 		
-		<div class="d-flex mt-3 justify-content-between">
+		<div class="d-flex mt-3 justify-content-between  mx-5">
 			<!-- Creator -->
 			<form:label path="creator">
 					<p class="w-30">Creator <form:errors path="creator" class="text-danger"/></p>
 			</form:label>
-			<form:input class="w-50" path="creator"/>
+			<form:input class="w-50" path="creator" placeholder="creator"/>
 		</div>
 		
-		<div class="d-flex mt-3 justify-content-between">
+		<div class="d-flex mt-3 justify-content-between  mx-5">
 			<!-- Version -->
 			<form:label path="version">
 				<p class="w-30">Version <form:errors path="version" class="text-danger"/></p>
 			</form:label>
-			<form:input class="w-50" path="version"/>
+			<form:input class="w-50" path="version" placeholder="version"/>
 		</div>
 		
-		<div class="d-flex align-items-end flex-column mt-3">
+		<div class="d-flex align-items-end flex-column mt-3  mx-5">
 			<button class="btn btn-primary px-5" type="submit">Submit</button>
 		</div>
 	</form:form>
