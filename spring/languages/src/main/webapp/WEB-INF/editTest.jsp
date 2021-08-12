@@ -90,17 +90,17 @@
 		<div class="d-flex mt-3 justify-content-between mx-5">
 			<!-- name -->
 				<p class="w-30">Name </p>
-			<input type="text" placeholder="name" class="w-50" />
+			<input type="text" placeholder="unable to add new language while editing existing" class="w-50" />
 		</div>
 		
 		<div class="d-flex mt-3 justify-content-between mx-5">
 					<p class="w-30">Creator </p>
-			<input type="text" placeholder="creator" class="w-50" />
+			<input type="text" placeholder="unable to add new language while editing existing" class="w-50" />
 		</div>
 		
 		<div class="d-flex mt-3 justify-content-between mx-5">
 				<p class="w-30">Version </p>
-			<input type="text" placeholder="version" class="w-50"/>
+			<input type="text" placeholder="unable to add new language while editing existing" class="w-50"/>
 		</div>
 		
 		<div class="d-flex align-items-end flex-column mt-3  mx-5">
