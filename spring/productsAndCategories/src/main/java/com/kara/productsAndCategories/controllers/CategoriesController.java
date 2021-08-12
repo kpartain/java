@@ -1,40 +1,45 @@
 package com.kara.productsAndCategories.controllers;
 
-import java.util.List;
 
 import javax.validation.Valid;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kara.productsAndCategories.models.Category;
-import com.kara.productsAndCategories.models.Product;
-import com.kara.productsAndCategories.repositories.CategoryRepository;
 import com.kara.productsAndCategories.services.CategoryService;
 
-@Service
+@Controller
 @RequestMapping("/categories")
-public class CategoriesController {
+public class CategoriesController  {
 	
-	@Autowired
+	
 	private final CategoryService categoryService;
 	
 	public CategoriesController(CategoryService categoryService) {
 		this.categoryService = categoryService;
 	}
+	@RequestMapping("")
+	public String redirectToNeww(@ModelAttribute("category")Category category) {
+		return "categoryForm.jsp";
+	}
+	@RequestMapping("/")
+	public String redirectToNewTooo(@ModelAttribute("category")Category category) {
+		return "categoryForm.jsp";
+	}
 	//new
 	@RequestMapping("/new")
-	public String persistCategory(l) {
+	public String persistCategory(@ModelAttribute("category")Category category) {
 		return "categoryForm.jsp";
 	}
 	//post
-	@RequestMapping(value="/new-post", method=RequestMethod.POST)
+	@RequestMapping(value="/new", method=RequestMethod.POST)
 	public String categoryPostRequest(@Valid @ModelAttribute("category")Category category, BindingResult result) {
 		//check if valid...
 		if(result.hasErrors()) {
@@ -47,11 +52,9 @@ public class CategoriesController {
 	
 	//id
 	@RequestMapping("/{categoryID}")
-	public String showCategory(@RequestParam("categoryID")Long categoryID, Model model) {
-		Category thisCategory = categoryService.findCategoryById(categoryID);
-		List<Product> productsInCategory = thisCategory.getProducts();
-		model.addAttribute("category", thisCategory);
-		model.addAttribute("productsInCategory", thisCategory);
-		return "categoryShow.jsp";
+	public String showCategory(@PathVariable("categoryID")Long categoryID, @ModelAttribute("category")Category category) {
+		Category thisCategory = categoryService.findCategory(categoryID);
+		category = thisCategory;
+		return "categoriesShow.jsp";
 	}
 }

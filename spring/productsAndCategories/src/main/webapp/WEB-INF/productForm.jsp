@@ -21,7 +21,7 @@
 <!--  MAIN DIV -->
 <div class="d-flex m-5">
 	<!--  New Product -->
-	<form:form method="POST" action="/product-post" modelAttribute="product">
+	<form:form method="POST" action="/products/new" modelAttribute="product">
 	
 		<fieldset class="border p-2">
 		
@@ -31,17 +31,17 @@
 			    	<!-- PRODUCT NAME -->
 			        <p class="d-flex justify-content-between gap-2">
 			            <form:label path="name">Name:</form:label>
-			            <form:input type="text" path="name" class="form-control input-lg w-50"/>
+			            <form:input path="name" class="form-control input-lg w-50"/>
 			        </p>
 			        <!-- DESCRIPTION -->
 			        <p class="d-flex justify-content-between gap-2">
 			            <form:label path="description">Description:</form:label>
-			            <form:textarea path="description" type="text"class="form-control input-lg w-50"/>
+			            <form:textarea path="description"  class="form-control input-lg w-50"/>
 			        </p>
 			        <!-- PRICE -->
 			        <p class="d-flex justify-content-between gap-2">
 			            <form:label path="price">Price:</form:label>
-			            <form:text path="price" type="text" class="form-control input-lg w-50"/>
+			            <form:input path="price" class="form-control input-lg w-50"/>
 			        </p>
 			        
 			        <div class="d-flex flex-row-reverse">

@@ -21,7 +21,7 @@
 <!--  MAIN DIV -->
 <div class="d-flex m-5">
 	<!--  New Category -->
-	<form:form method="POST" action="/category-post" modelAttribute="category">
+	<form:form method="POST" action="/categories/new" modelAttribute="category">
 	
 		<fieldset class="border p-2">
 		
@@ -31,7 +31,7 @@
 			    	<!-- CATEGORY NAME -->
 			        <p class="d-flex justify-content-between gap-2">
 			            <form:label path="name">Name:</form:label>
-			            <form:input type="text" path="name" class="form-control input-lg w-50"/>
+			            <form:input path="name" class="form-control input-lg w-50"/>
 			        </p>
 			        
 			        <div class="d-flex flex-row-reverse">
