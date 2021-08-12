@@ -104,7 +104,7 @@ sl2.push(-2);
 sl2.push(-3);
 sl2.push(5);
 sl2.push(6);
-console.log("ORIGINAL");
+console.log("ORIGINAL TWO");
 sl2.printPretty();
 console.log("PARTITIONED");
 var partS = sl2.partitionPositives();
