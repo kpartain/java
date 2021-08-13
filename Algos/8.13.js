@@ -45,10 +45,16 @@ class CircleQueue {
 var circQ = new CircleQueue(4);
 circQ.enqueue(1);
 circQ.enqueue(2);
-console.log("EXPECT 1, 2\n", circQ);
+console.log("********************* EXPECT 1, 2 *********************\n", circQ);
 circQ.enqueue(5);
-console.log("EXPECT 1, 2, 5\n", circQ);
+console.log(
+    "******************* EXPECT 1, 2, 5 ***************************\n",
+    circQ
+);
 circQ.enqueue(3);
 circQ.enqueue(4);
 //should not be able to add another
-console.log("EXPECT 1, 2, 5, 3\n", circQ);
+console.log(
+    "********************** EXPECT 1, 2, 5, 3 ****************************\n",
+    circQ
+);
