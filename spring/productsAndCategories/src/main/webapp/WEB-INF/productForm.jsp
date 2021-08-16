@@ -22,7 +22,7 @@
 <div class="d-flex m-5">
 	<!--  New Product -->
 	<form:form method="POST" action="/products/product-post" modelAttribute="product">
-	
+
 		<fieldset class="border p-2">
 		
 			    <legend class="w-auto">New Product</legend>
@@ -36,7 +36,9 @@
 			        <!-- DESCRIPTION -->
 			        <p class="d-flex justify-content-between gap-2">
 			            <form:label path="description">Description:</form:label>
-			            <form:textarea path="description" class="form-control input-lg w-50"/>
+
+			            <form:textarea path="description"  class="form-control input-lg w-50"/>
+
 			        </p>
 			        <!-- PRICE -->
 			        <p class="d-flex justify-content-between gap-2">

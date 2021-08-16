@@ -31,7 +31,7 @@
 			    	<!-- CATEGORY NAME -->
 			        <p class="d-flex justify-content-between gap-2">
 			            <form:label path="name">Name:</form:label>
-			            <form:input type="text" path="name" class="form-control input-lg w-50"/>
+			            <form:input path="name" class="form-control input-lg w-50"/>
 			        </p>
 			        
 			        <div class="d-flex flex-row-reverse">

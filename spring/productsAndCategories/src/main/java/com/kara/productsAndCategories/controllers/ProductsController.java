@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,17 +19,25 @@ import com.kara.productsAndCategories.services.ProductService;
 public class ProductsController {
 	
 	private final ProductService productService;
-	
+
 	public ProductsController(ProductService productService) {
 		this.productService = productService;
 	}
+	@RequestMapping("")
+	public String redirectToNew(@ModelAttribute("product")Product product) {
+		return "productForm.jsp";
+	}
+	@RequestMapping("/")
+	public String redirectToNewToo(@ModelAttribute("product")Product product) {
+		return "productForm.jsp";
+	}
 	//new
 	@RequestMapping("/new")
-	public String persistProduct(@ModelAttribute("product") Product product) {
+	public String persistProduct(@ModelAttribute("product")Product product) {
 		return "productForm.jsp";
 	}
 	//post
-	@RequestMapping(value="/new-post", method=RequestMethod.POST)
+	@RequestMapping(value="/new", method=RequestMethod.POST)
 	public String productPostRequest(@Valid @ModelAttribute("product") Product product, BindingResult result) {
 		//check if valid...
 		if(result.hasErrors()) {

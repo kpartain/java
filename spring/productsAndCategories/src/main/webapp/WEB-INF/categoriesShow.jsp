@@ -25,13 +25,15 @@
 	<!--  LEFT: Current Products  -->
 	<div class="m-5 w-50">
 	<h2>Products:</h2> <!--currently has -->
+	<c:if test="${category.getProducts() != null}">
 	<ul>
-		<c:forEach items="${productsInCategory}" var="eachProduct" varStatus="loop">
+		<c:forEach items="${category.getProducts()}" var="eachProduct" varStatus="loop">
 			<li>
 				<c:out value="${eachProduct.name}" />
 			</li>
 		</c:forEach>
 	</ul>
+	</c:if>
 	</div>
     
     <!--  RIGHT: Add a product, flex half/half -->
