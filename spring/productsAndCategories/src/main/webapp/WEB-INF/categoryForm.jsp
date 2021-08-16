@@ -18,31 +18,24 @@
 <!-- 	<script src="/webjars/bootstrap/js/bootstrap.min.js"></script> -->
 </head>
 <body>
-<!--  MAIN DIV -->
-<div class="d-flex m-5">
-	<!--  New Category -->
-	<form:form method="POST" action="/categories/new" modelAttribute="category">
-	
-		<fieldset class="border p-2">
-		
-			    <legend class="w-auto">New Category</legend>
-			    
-			    	<p><form:errors path="category.*"/></p>
-			    	<!-- CATEGORY NAME -->
-			        <p class="d-flex justify-content-between gap-2">
-			            <form:label path="name">Name:</form:label>
-			            <form:input path="name" class="form-control input-lg w-50"/>
-			        </p>
-			        
-			        <div class="d-flex flex-row-reverse">
-			        	<input type="submit" class="btn btn-primary" value="Create"/>
-			        </div>
-			
-	  		 </fieldset>
-	  		 
-	    </form:form>
-    <!--  end main div -->
-</div>
-
+	<div class="d-flex justify-content-around">
+		<a href="/products/new">New Product</a>
+		<a href="/categories/new">New Category</a>
+	</div>
+	<div class="d-flex justify-content-around m-5">
+		<h1 class="text-center">New Category</h1>
+	</div>
+	<div class="mx-5">
+		<form:form action="/categories/new" method="POST" modelAttribute="category">
+			<div class="d-flex justify-content-between mb-3 mx-5 w-100">
+				<form:label path="name">Name</form:label>
+					<p class="text-danger"><form:errors path="name"/></p>
+				<form:input path="name" class="w-50 mx-5"/>
+			</div>
+			<div class="mx-5">
+				<input type="submit" value="Create" class="btn btn-success"/>
+			</div>
+		</form:form>
+	</div>
 </body>
 </html>

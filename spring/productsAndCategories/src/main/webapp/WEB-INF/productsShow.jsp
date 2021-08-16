@@ -18,43 +18,51 @@
 <!-- 	<script src="/webjars/bootstrap/js/bootstrap.min.js"></script> -->
 </head>
 <body>
-<!--  Product name header  -->
-<h1 class="m-5"><c:out value="${product.name}"/></h1>
-<!--  MAIN DIV - flex, half/half-->
-<div class="d-flex m-5 justify-content-between gap-5">
-	<!--  LEFT: Current Categories  -->
-	<div class="m-5 w-50">
-	<h2>Categories:</h2> <!-- Categories that the product currently has -->
-	<ul>
-		<c:forEach items="${categoriesOfProduct}" var="eachCategory" varStatus="loop">
-			<li>
-				<c:out value="${eachCategory.name}" />
-			</li>
-		</c:forEach>
-	</ul>
+	<div class="d-flex justify-content-around">
+		<a href="/products/new">New Product</a>
+		<a href="/categories/new">New Category</a>
 	</div>
-    
-    <!--  RIGHT: Add a category, flex half/half -->
-    <div class="m-5 w-50 d-flex m-5 justify-content-between gap-5">
-	    <div><p>Add Category</p></div>
-	    <div> <!--  Double check syntax - should we allow multiple selections?? -->
-		     <form:form method="PUT" action="/add-category-to-product/{product.id}" modelAttribute="product">
-				<form:select path="categories" name="categories">
-			  		<c:forEach items="${categoriesNotSelected}" var="eachCategory"  varStatus="loop"> <!-- Categories that the product currently doesn't have -->
-			  			<!--  the VALUE is the entire DOJO OBJECT! -->
-			    		<form:option value="${eachCategory}">
-			    			<!-- 1 Name format for testing  -->
-			        		<c:out value="${eachCategory.name}"></c:out>
-			    		</form:option>
-			  		</c:forEach>
-				</form:select>
-				<button class="btn btn-primary mx-5 px-5" type="submit">Add Category</button>
-			</form:form>
+	<div class="d-flex justify-content-around m-5">
+		<h1>Product: 
+			<c:out value="${product.name}"/>
+		</h1>
+	</div>
+	
+	<!--  PARENT DIV -->
+	<div class="d-flex justify-content-between m-5">
+		
+		<!--  LEFT - CURRENT CATEGORIES -->
+		<div class="justify-content-between">
+			<p>This Product's Categories:</p>
+			<ul style="list-style: none">
+				<c:forEach items="${product.categories}" var="category">
+					<li>
+						<c:out value="${category.name}"/>
+					</li>
+				</c:forEach>
+			</ul>
 		</div>
-    </div>
-  
-<!--  end main div -->
-</div>
-
+		
+		<!--  RIGHT - ADD CATEGORIES FORM-->
+		<div>
+			<c:if test="${!empty categories}">
+			<div>
+				<h2>Add Category to Product:</h2>
+			</div>
+			<form action="/products/${product.id}" method="POST">
+				<div class="d-flex justify-content-between">
+					<label for="category">Category:</label>
+					<select name="category">
+						<c:forEach items="${categories}" var="category">
+							<option value="${category.id}"><c:out value="${category.name}"/></option>
+						</c:forEach>
+					</select>
+				</div>
+				<input type="submit" value="Add" class="btn btn-primary"/>
+			</form>
+			</c:if>
+		</div>
+	
+	</div>
 </body>
 </html>
