@@ -17,9 +17,7 @@ import com.kara.productsAndCategories.services.CategoryService;
 
 @Controller
 @RequestMapping("/categories")
-public class CategoriesController  {
-	
-	
+public class CategoriesController {
 	private final CategoryService categoryService;
 	
 	public CategoriesController(CategoryService categoryService) {
@@ -45,16 +43,16 @@ public class CategoriesController  {
 		if(result.hasErrors()) {
 			return "categoriesForm.jsp";
 		} else {
-			categoryService.createCategory(category);
+			Category thisCat = categoryService.createCategory(category);
 			return "redirect:/categories/new";
 		}
 	}
 	
 	//id
-	@RequestMapping("/{categoryID}")
-	public String showCategory(@PathVariable("categoryID")Long categoryID, @ModelAttribute("category")Category category) {
-		Category thisCategory = categoryService.findCategory(categoryID);
-		category = thisCategory;
-		return "categoriesShow.jsp";
+	@RequestMapping("/{id}")
+	public String showCategory(@RequestParam("id")Long categoryID, Model model) {
+		Category thisCategory = categoryService.findCategoryById(categoryID);
+		model.addAttribute("category", thisCategory);
+		return "categoryShow.jsp";
 	}
 }

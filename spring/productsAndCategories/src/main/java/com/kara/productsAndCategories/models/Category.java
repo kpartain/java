@@ -22,6 +22,7 @@ public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    
     private String name;
     
     @Column(updatable=false)
@@ -41,8 +42,7 @@ public class Category {
     public Category() {
     	//bean
     }
-    public Category(Long id, String name) {
-    	this.id = id;
+    public Category(String name) {
     	this.name = name;
     }
     

@@ -1,6 +1,8 @@
 package com.kara.productsAndCategories.services;
 
 import java.util.Optional;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 
 import org.springframework.stereotype.Service;
@@ -18,9 +20,9 @@ public class CategoryService {
 	}
 
 	public Category createCategory(Category category) {
-		// TODO Auto-generated method stub
 		return categoryRepository.save(category);
 	}
+
 
 	public Category findCategory(Long categoryID) {
 		Optional <Category> foundOptional = categoryRepository.findById(categoryID);

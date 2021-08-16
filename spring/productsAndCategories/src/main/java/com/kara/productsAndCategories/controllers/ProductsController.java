@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.kara.productsAndCategories.models.Category;
 import com.kara.productsAndCategories.models.Product;
 import com.kara.productsAndCategories.services.ProductService;
 
@@ -44,18 +43,17 @@ public class ProductsController {
 		if(result.hasErrors()) {
 			return "productsForm.jsp";
 		} else {
-			productService.createProduct(product);
+			Product thisProd = productService.createProduct(product);
 			return "redirect:/products/new";
 		}
 		
 	}
 	
 	//id
-	@RequestMapping("/{productID}")
-	public String showProduct(@PathVariable("productID") Long productID, Model model) {
-		Product thisProduct = productService.findProduct(productID);
+	@RequestMapping("/{id}")
+	public String showProduct(@RequestParam("id") Long id, Model model) {
+		Product thisProduct = productService.findProductById(id);
 		model.addAttribute("product", thisProduct);
-		model.addAttribute("categoriesOfProduct", thisProduct.getCategories());
 		return "productShow.jsp";
 	}
 

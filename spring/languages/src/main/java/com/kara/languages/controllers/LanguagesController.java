@@ -57,35 +57,31 @@ public class LanguagesController {
 	}
 	
 	//edit language form page
-	@RequestMapping("/{id}/edit")
+	@RequestMapping("/{id}")
 	public String showEditForm(@PathVariable("id") Integer id, Model model) {
-		//get the single Language object
+		//all languages
+		List<Language> allLanguages = languageService.allLanguages();
+		model.addAttribute("allLanguages", allLanguages);
+		//get the single Language object to edit
 		Language language = languageService.findLanguageById(id);
-		//hand it to the form via model
 		model.addAttribute("language", language);
-		return "editForm.jsp";
+		return "editTest.jsp";
 	}
 	
 	//post from edit-language
-	@RequestMapping(value="/{id}/edited", method=RequestMethod.PUT)
-	public String updateExistingLanguage(@Valid @ModelAttribute("language") Language language, BindingResult result) {
+	@RequestMapping(value="/{id}", method=RequestMethod.POST)
+	public String updateExistingLanguage(@Valid @ModelAttribute("language") Language language, BindingResult result, Model model) {
 		//use setters to update the existing language
 		if (result.hasErrors()) {
-            return "editForm.jsp";
+			System.out.println(result.getAllErrors());
+			List<Language> allLanguages = languageService.allLanguages();
+			model.addAttribute("allLanguages", allLanguages);
+			model.addAttribute("language", language);
+			return "editTest.jsp";
         } else {
             languageService.createLanguage(language);
             return "redirect:/languages";
         }
-	}
-	
-	//show page
-	@RequestMapping("/{id}")
-	public String showSingleLanguage(@PathVariable("id") Integer id, Model model) {
-		//get the single Language object
-		Language language = languageService.findLanguageById(id);
-		//hand it to the page via model
-		model.addAttribute("language", language);
-		return "show.jsp";
 	}
 	
 	//delete

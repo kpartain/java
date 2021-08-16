@@ -25,19 +25,19 @@ public class Language {
     private Integer id;
 	
 	//name - required, 3-20 characters
-	@NotNull
-    @Size(min = 3, max = 20)
+	@NotNull(message="required")
+    @Size(min = 3, max = 20, message="must be 3-20 characters")
 	@Column(name="name", nullable=false)
     private String name;
 	
 	//creator - required, 3-20 characters - PERSISTED AS ONE COLUMN PER ASSIGNMENT
-	@NotNull
-    @Size(min = 3, max = 20)
+	@NotNull(message="required")
+    @Size(min = 3, max = 20, message="must be 3-20 characters")
 	@Column(name="creator", nullable=false)
     private String creator;
 	
 	//version - required
-	@NotBlank
+	@NotBlank(message="required")
 	@Column(name="version", nullable=false)
     private String version;
 	
