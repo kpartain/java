@@ -21,7 +21,7 @@
 <!--  MAIN DIV -->
 <div class="d-flex m-5">
 	<!--  New Category -->
-	<form:form method="POST" action="/category-post" modelAttribute="category">
+	<form:form method="POST" action="/categories/category-post" modelAttribute="category">
 	
 		<fieldset class="border p-2">
 		

@@ -1,11 +1,8 @@
 package com.kara.productsAndCategories.controllers;
 
-import java.util.List;
-
 import javax.validation.Valid;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -13,16 +10,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.kara.productsAndCategories.models.Category;
 import com.kara.productsAndCategories.models.Product;
-import com.kara.productsAndCategories.repositories.ProductRepository;
 import com.kara.productsAndCategories.services.ProductService;
 
-@Service
+@Controller
 @RequestMapping("/products")
 public class ProductsController {
 	
-	@Autowired
 	private final ProductService productService;
 	
 	public ProductsController(ProductService productService) {
@@ -30,7 +24,7 @@ public class ProductsController {
 	}
 	//new
 	@RequestMapping("/new")
-	public String persistProduct() {
+	public String persistProduct(@ModelAttribute("product") Product product) {
 		return "productForm.jsp";
 	}
 	//post
@@ -40,19 +34,17 @@ public class ProductsController {
 		if(result.hasErrors()) {
 			return "productsForm.jsp";
 		} else {
-			productService.createProduct(product);
+			Product thisProd = productService.createProduct(product);
 			return "redirect:/products/new";
 		}
 		
 	}
 	
 	//id
-	@RequestMapping("/{productID}")
-	public String showProduct(@RequestParam("productID") Long productID, Model model) {
-		Product thisProduct = categoryService.findProductById(productID);
-		List<Category> categoriesOfProduct = thisProduct.getCategories();
+	@RequestMapping("/{id}")
+	public String showProduct(@RequestParam("id") Long id, Model model) {
+		Product thisProduct = productService.findProductById(id);
 		model.addAttribute("product", thisProduct);
-		model.addAttribute("categoriesOfProduct", categoriesOfProduct);
 		return "productShow.jsp";
 	}
 

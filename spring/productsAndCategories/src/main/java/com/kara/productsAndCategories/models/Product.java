@@ -22,12 +22,19 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    
     private String name;
+    
     private String description;
+    
     private float price;
+    
     @Column(updatable=false)
+    
     private Date createdAt;
+    
     private Date updatedAt;
+    
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
         name = "categories_products", 
@@ -39,8 +46,8 @@ public class Product {
     public Product() {
     	
     }
-    public Product(Long id, String name, String description, float price) {
-    	this.id = id;
+    
+    public Product(String name, String description, float price) {
     	this.name = name;
     	this.description = description;
     	this.price = price;

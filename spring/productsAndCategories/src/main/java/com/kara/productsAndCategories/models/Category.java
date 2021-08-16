@@ -22,10 +22,14 @@ public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    
     private String name;
+    
     @Column(updatable=false)
     private Date createdAt;
+    
     private Date updatedAt;
+    
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "categories_products", 
@@ -38,8 +42,7 @@ public class Category {
     public Category() {
     	
     }
-    public Category(Long id, String name) {
-    	this.id = id;
+    public Category(String name) {
     	this.name = name;
     }
     
