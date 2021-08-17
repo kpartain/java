@@ -17,15 +17,19 @@
 <!-- 	<script src="/webjars/jquery/jquery.min.js"></script>-->	
 <!-- 	<script src="/webjars/bootstrap/js/bootstrap.min.js"></script> -->
 </head>
-<body>
+<body>		
+<div class="d-flex justify-content-around">
+<h1>LOGIN & REGISTRATION</h1>
+</div>
 	<!-- NAV ELEMENTS -->
 	<div class="d-flex justify-content-around">
-		<h1>EDIT EVENT</h1>
 		<a href="/events">Event Dashboard</a>
 		<a href="/">Logout</a>
 	</div>
 	
+	<div class="d-flex justify-content-between mx-5">
 <!-- *****************************************************REGISTER***************************************************** -->
+	 <div>
 	    <form:form action="/register" method="post" modelAttribute="newUser">
         <div class="form-group">
             <label>First Name:</label>
@@ -78,9 +82,10 @@
         </div>
         <input type="submit" value="Register" class="btn btn-primary" />
     </form:form>
-    
+    </div>
 <!-- *****************************************************LOGIN *****************************************************************-->
-    <form:form action="/login" method="post" modelAttribute="newLogin">
+<div>
+ <form:form action="/login" method="post" modelAttribute="newLogin">
         <div class="form-group">
             <label>Email:</label>
             <form:input path="email" class="form-control" />
@@ -94,6 +99,10 @@
         </div>
         <input type="submit" value="Login" class="btn btn-success" />
     </form:form>
+    </div>
+    
+    <!--  end main flex parent box -->
+ </div>
 	
 </body>
 </html>

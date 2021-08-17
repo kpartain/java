@@ -3,6 +3,7 @@ package com.kara.events.models;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -17,6 +18,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name="events")
@@ -27,21 +29,25 @@ public class Event {
     private Long id;
     
     //ATTRIBUTE NAME
+    @NotEmpty(message="Event name is required!")
     private String name;
     
     //ATTRIBUTE DATE OF EVENT
+    @NotEmpty(message="Event date is required!")
     private Date eventDate;
     
     //ATTRIBUTE LOCATION CITY
+    @NotEmpty(message="Event city is required!")
     private String eventCity;
     
     //ATTRIBUTE LOCATION STATE
+    @NotEmpty(message="Event state is required!")
     private String eventState;
     
     //ATTRIBUTE HOST (one user can host many events, each event can have one host)
 	 @ManyToOne(fetch = FetchType.LAZY)
 	 @JoinColumn(name="user_id")
-	 private User host;
+	 private User host; //this comes from User > mapped by "host"
     
     //ATTRIBUTE ATTENDEES (one event can have many users, one user can attend many events)
     @ManyToMany(fetch = FetchType.LAZY)
@@ -53,7 +59,7 @@ public class Event {
     private List<User> attendees;
     
     //ATTRIBUTE MESSAGES (one event can have many messages, each message left by a single user)
-    @OneToMany(mappedBy="messages", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy="event" ,cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Message> messages;
     
     //UPDATED/CREATED

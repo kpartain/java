@@ -3,6 +3,7 @@ package com.kara.events.models;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -72,15 +73,15 @@ public class User {
 	@Column(name="updated_at")
 	private Date updatedAt;
 	
-	//ONE USER CAN LEAVE MANY MESSAGES, ONE COMMENT CAN HAVE ONE AUTHOR USER
-	@OneToMany(mappedBy="user", fetch = FetchType.LAZY)
+	//ONE USER CAN LEAVE MANY MESSAGES
+	@OneToMany(mappedBy="author", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Message> messages;
 	
-	//ONE USER CAN HOST MANY EVENTS, ONE EVENT CAN HAVE ONE HOST
-	@OneToMany(mappedBy="user", fetch = FetchType.LAZY)
+	//ONE USER CAN HOST MANY EVENTS
+	@OneToMany(mappedBy="host", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Event> hostingEvents;
 	
-	//ONE USER CAN ATTEND MANY EVENTS, ONE EVENT CAN HAVE MANY ATTENDEES
+	//MANY USERS CAN ATTEND MANY EVENTS
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "events_users", 

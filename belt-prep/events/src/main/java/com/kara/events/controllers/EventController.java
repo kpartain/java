@@ -22,7 +22,7 @@ public class EventController {
 	//session items: user_id
 	
 	//list of states for form
-	private final List<String> stateCodes = USStates.listOfUSStatesCode;
+	private final List<String> stateCodes = USStates.listOfStates;
 	
 	@Autowired
 	private EventService eventService;
@@ -52,11 +52,24 @@ public class EventController {
 		model.addAttribute("eventsAttendedByThisUser", eventsAttendedByThisUser);
 		
 		// events in and out of state
-		List<Event> eventsInState = eventService.findAllByState(currentUsersState);
+		List<Event> eventsInState = eventService.findAllByState(thisUser.getState());
 		model.addAttribute("eventsInState", eventsInState);
-		List<Event> eventsNotInState = eventService.findAllNotInState(currentUsersState);
+		List<Event> eventsNotInState = eventService.findAllNotInState(thisUser.getState());
 		model.addAttribute("eventsNotInState", eventsNotInState);
+		
+		return "2-events-dashboard.jsp";
 	}
+	
 	//post mapping to add a new event.
+	
+	//delete event
+	
+	//attend event
+	
+	//un-attend event
+	
+	//edit event page render
+	
+	//edit event page POST
 	
 }

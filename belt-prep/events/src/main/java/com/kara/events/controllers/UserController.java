@@ -24,7 +24,7 @@ public class UserController {
 	//session items: user_id
 	
 	//list of states for form
-	private final List<String> stateCodes = USStates.listOfUSStatesCode;
+	private final List<String> stateCodes = USStates.listOfStates;
 	
 	@Autowired
 	private UserService userServ;
@@ -34,7 +34,7 @@ public class UserController {
 		model.addAttribute("listOfStateCodes", stateCodes);
 	    model.addAttribute("newUser", new User());
 	    model.addAttribute("newLogin", new LoginUser());
-	    return "index.jsp";
+	    return "1-login-register.jsp";
 	}
 	
 	@PostMapping("/register")
@@ -43,7 +43,7 @@ public class UserController {
 	    userServ.register(newUser, result);
 	    if(result.hasErrors()) {
 	        model.addAttribute("newLogin", new LoginUser());
-	        return "index.jsp";
+	        return "1-login-register.jsp";
 	    }
 	    session.setAttribute("user_id", newUser.getId());
 	    return "redirect:/events";
@@ -55,7 +55,7 @@ public class UserController {
 	    User user = userServ.login(newLogin, result);
 	    if(result.hasErrors()) {
 	        model.addAttribute("newUser", new User());
-	        return "index.jsp";
+	        return "1-login-register.jsp";
 	    }
 	    session.setAttribute("user_id",  user.getId());
 	    return "redirect:/events";

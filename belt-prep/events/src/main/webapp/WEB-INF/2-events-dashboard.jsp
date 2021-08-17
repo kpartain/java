@@ -18,9 +18,11 @@
 <!-- 	<script src="/webjars/bootstrap/js/bootstrap.min.js"></script> -->
 </head>
 <body>
+<div class="d-flex justify-content-around">
+<h1>EVENT DASHBOARD</h1>
+</div>
 	<!-- NAV ELEMENTS -->
 	<div class="d-flex justify-content-around">
-		<h1>EDIT EVENT</h1>
 		<a href="/events">Event Dashboard</a>
 		<a href="/logout">Logout</a>
 	</div>
@@ -46,8 +48,8 @@
 		   <c:forEach items="${eventsInState}" var="eventInState"  varStatus="loop">
 			   <tr>
 			   		<td><c:out value="${eventInState.name}" /></td>
-			   		<td><c:out value="${eventInState.date}" /></td>
-			   		<td><c:out value="${eventInState.city}" /></td>
+			   		<td><c:out value="${eventInState.eventDate}" /></td>
+			   		<td><c:out value="${eventInState.eventCity}" /></td>
 			   		<td><c:out value="${eventInState.host.firstName}" /></td>
 			  <!-- If User IS The Host -->
 			  <c:if test="${eventInState.host == thisUser}">
@@ -92,8 +94,9 @@
 		  		   <c:forEach items="${eventsNotInState}" var="eventNotInState"  varStatus="loop">
 			   <tr>
 			   		<td><c:out value="${eventNotInState.name}" /></td>
-			   		<td><c:out value="${eventNotInState.date}" /></td>
-			   		<td><c:out value="${eventNotInState.city}" /></td>
+			   		<td><c:out value="${eventNotInState.eventDate}" /></td>
+			   		<td><c:out value="${eventNotInState.eventCity}" /></td>
+			   		<td><c:out value="${eventNotInState.eventState}" /></td>
 			   		<td><c:out value="${eventNotInState.host.firstName}" /></td>
 			  <!-- If User IS The Host -->
 			  <c:if test="${eventInState.host == thisUser}">

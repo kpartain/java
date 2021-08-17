@@ -1,8 +1,5 @@
 package com.kara.events.models;
 
-import java.util.Date;
-
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -10,9 +7,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.PrePersist;
-import javax.persistence.PreUpdate;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name="messages")
@@ -23,23 +19,19 @@ public class Message {
     private Long id;
     
     //ATTRIBUTE MESSAGE
+    @NotEmpty(message="Message is required!")
     private String message;
     
     //ATTRIBUTE AUTHOR (One author can have many comments)
 	 @ManyToOne(fetch = FetchType.LAZY)
-	 @JoinColumn(name="user_id")
-	 private User author;
+	 @JoinColumn(name="user_id", referencedColumnName="id", nullable=false)
+	 private User author; //this comes from User > mapped by "author"
     
 	//ATTRIBUTE EVENT (One event can have many comments)
 	 @ManyToOne(fetch = FetchType.LAZY)
-	 @JoinColumn(name="event_id")
-	 private Event event;
-	 
-    //UPDATED/CREATED
-    @Column(updatable=false)
-    private Date createdAt;
-    private Date updatedAt;
-    
+	 @JoinColumn(name="event_id", referencedColumnName="id", nullable=false)
+	 private Event event; //this comes from Event > mapped by "event"
+
     //BEAN
     public Message() {
     }
@@ -50,18 +42,7 @@ public class Message {
     	this.event = event;
     }
     
-    //Setter for UPDATED/CREATED
-    @PrePersist
-		public void onCreate() {
-			this.createdAt = new Date();
-		}
 
-	@PreUpdate
-		public void onUpdate() {
-			this.updatedAt = new Date();
-		}
-	
-	
 	//Relationships
 	
 	
@@ -90,17 +71,6 @@ public class Message {
 	public void setEvent(Event event) {
 		this.event = event;
 	}
-	public Date getCreatedAt() {
-		return createdAt;
-	}
-	public void setCreatedAt(Date createdAt) {
-		this.createdAt = createdAt;
-	}
-	public Date getUpdatedAt() {
-		return updatedAt;
-	}
-	public void setUpdatedAt(Date updatedAt) {
-		this.updatedAt = updatedAt;
-	}
-	
+
+
 }

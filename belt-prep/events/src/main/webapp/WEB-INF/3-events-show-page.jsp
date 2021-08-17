@@ -18,9 +18,11 @@
 <!-- 	<script src="/webjars/bootstrap/js/bootstrap.min.js"></script> -->
 </head>
 <body>
+<div class="d-flex justify-content-around">
+<h1>EDIT SHOW PAGE</h1>
+</div>
 	<!-- NAV ELEMENTS -->
 	<div class="d-flex justify-content-around">
-		<h1>EDIT EVENT</h1>
 		<a href="/events">Event Dashboard</a>
 		<a href="/logout">Logout</a>
 	</div>
