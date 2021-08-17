@@ -91,7 +91,27 @@ class BST {
         this.root == null ? true : false;
     }
 
-    min() {}
+    min() {
+        if (this.root === null) {
+            return null;
+        }
+        var runner = this.root;
+        while (runner.left != null) {
+            runner = runner.left;
+        }
+        return runner.value;
+    }
+
+    max() {
+        if (this.root === null) {
+            return null;
+        }
+        var runner = this.root;
+        while (runner.right != null) {
+            runner = runner.right;
+        }
+        return runner.value;
+    }
 
     minRecursive(current = this.root) {
         // 1. BASE CASE - WHEN THE NODE GIVEN IS NULL
@@ -107,8 +127,6 @@ class BST {
         // 3. RECURSIVE CALL
         return this.minRecursive(current);
     }
-
-    max() {}
 
     maxRecursive(current = this.root) {
         // 1. BASE CASE - WHEN THE NODE GIVEN IS NULL
