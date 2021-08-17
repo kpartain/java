@@ -22,7 +22,7 @@
 	<div class="d-flex justify-content-around">
 		<h1>EDIT EVENT</h1>
 		<a href="/events">Event Dashboard</a>
-		<a href="/">Logout</a>
+		<a href="/logout">Logout</a>
 	</div>
 	
 	<!-- BODY -->

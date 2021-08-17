@@ -10,6 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 
 @Entity
@@ -28,7 +30,7 @@ public class Message {
 	 @JoinColumn(name="user_id")
 	 private User author;
     
-	//ATTRIBUTE AUTHOR (One event can have many comments)
+	//ATTRIBUTE EVENT (One event can have many comments)
 	 @ManyToOne(fetch = FetchType.LAZY)
 	 @JoinColumn(name="event_id")
 	 private Event event;
@@ -47,5 +49,58 @@ public class Message {
     	this.author = author;
     	this.event = event;
     }
+    
+    //Setter for UPDATED/CREATED
+    @PrePersist
+		public void onCreate() {
+			this.createdAt = new Date();
+		}
 
+	@PreUpdate
+		public void onUpdate() {
+			this.updatedAt = new Date();
+		}
+	
+	
+	//Relationships
+	
+	
+    // Getters/Setters OTHER
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
+	public String getMessage() {
+		return message;
+	}
+	public void setMessage(String message) {
+		this.message = message;
+	}
+	public User getAuthor() {
+		return author;
+	}
+	public void setAuthor(User author) {
+		this.author = author;
+	}
+	public Event getEvent() {
+		return event;
+	}
+	public void setEvent(Event event) {
+		this.event = event;
+	}
+	public Date getCreatedAt() {
+		return createdAt;
+	}
+	public void setCreatedAt(Date createdAt) {
+		this.createdAt = createdAt;
+	}
+	public Date getUpdatedAt() {
+		return updatedAt;
+	}
+	public void setUpdatedAt(Date updatedAt) {
+		this.updatedAt = updatedAt;
+	}
+	
 }
