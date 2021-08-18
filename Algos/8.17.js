@@ -5,16 +5,21 @@ class BSTNode {
         this.right = null;
     }
 }
+
 class BST {
     constructor() {
         this.root = null;
     }
     search(val) {
+        // BST IS EMPTY
         if (this.root === null) {
             return false;
         }
+        // BST IS NOT EMPTY
         var runner = this.root;
+
         while (runner != null) {
+            // IS THE VALUE WITHIN THE NODE
             if (runner.value === val) {
                 return true;
             } else if (val < runner.value) {
@@ -27,17 +32,25 @@ class BST {
     }
 
     insertIterative(val) {
+        // IS THE BST EMPTY?
         if (this.root === null) {
             this.root = new BSTNode(val);
         }
+        // HAVE YOUR RUNNER END UP IN THE COORECT SPOT
+        // CREATE A NODE ON THE CORRECT SIDE OF THAT NODE
         while (runner != null) {
+            // CHECK TO SEE IF VALUE TO INSERT IS LESS THAN RUNNER VALES
             if (val < runner.value) {
+                // CHECK TO SEE IF THERE IS AN EMPTY PLACE TO CREATE NEW NODE
                 if (runner.left === null) {
                     runner.left = new BSTNode(val);
                     return;
                 }
+                // IF THERE IS AN EXISTING NODE, KEEP ON RUNNING THROUGH BST
                 runner = runner.left;
-            } else if (val > runner.value) {
+            }
+            // CHECK TO SEE IF VALUE TO INSERT IS GREATER THAN RUNNER VALES
+            else if (val > runner.value) {
                 if (runner.right === null) {
                     runner.right = new BSTNode(val);
                     return;
@@ -47,26 +60,31 @@ class BST {
         }
     }
     insertRecursive(val, current = this.root) {
+        //Base Case first
         let newNode = new BSTNode(val);
         if (this.root === null) {
             this.root = newNode;
-            return;
         }
+
+        //Forward progress
         if (val < current.value) {
             if (current.left == null) {
                 current.left = newNode;
                 return newNode;
             } else {
-                return this.insertRecursive(val, current.left);
+                current = current.left;
             }
         } else if (val > current.value) {
             if (current.right == null) {
                 current.right = newNode;
                 return newNode;
             } else {
-                return this.insertRecursive(val, current.right);
+                current = current.right;
             }
         }
+
+        //Recursive call
+        return this.insertRecursive(val, current);
     }
 
     isEmpty() {
@@ -96,69 +114,32 @@ class BST {
     }
 
     minRecursive(current = this.root) {
+        // 1. BASE CASE - WHEN THE NODE GIVEN IS NULL
         if (current == null) {
-            return false;
+            return false; //If the bst is empty
         }
+        //If we find the value we are looking for, and there is no smaller value
         if (current.left == null) {
             return current.value;
         }
+        // 2. FORWARD PROGRESS
         current = current.left;
+        // 3. RECURSIVE CALL
         return this.minRecursive(current);
     }
 
     maxRecursive(current = this.root) {
+        // 1. BASE CASE - WHEN THE NODE GIVEN IS NULL
         if (current == null) {
-            return false;
+            return false; //If the bst is empty
         }
+        //If we find the value we are looking for, and there is no smaller value
         if (current.right == null) {
             return current.value;
         }
+        // 2. FORWARD PROGRESS
         current = current.right;
+        // 3. RECURSIVE CALL
         return this.maxRecursive(current);
     }
-
-    printInOrder(node = this.root) {
-        if (node == null) {
-            return;
-        }
-        this.printInOrder(node.left);
-        console.log(node.value);
-        debugger;
-        return this.printInOrder(node.right);
-    }
-
-    sortedArrToBST(arr) {
-        this.root = this.sortedArrToBSTHelper(arr);
-    }
-    sortedArrToBSTHelper(arr) {
-        if (arr.length < 1) {
-            return null;
-        }
-        var midIndex = Math.floor(arr.length / 2);
-        var newNode = new BSTNode(arr[midIndex]);
-        newNode.left = this.sortedArrToBSTHelper(arr.slice(0, midIndex));
-        newNode.right = this.sortedArrToBSTHelper(
-            arr.slice(midIndex + 1, arr.length)
-        );
-        return newNode;
-    }
 }
-
-var binTree = new BST();
-binTree.insertRecursive(5);
-binTree.insertRecursive(7);
-binTree.insertRecursive(6);
-binTree.insertRecursive(1);
-binTree.insertRecursive(4);
-binTree.insertRecursive(3);
-binTree.insertRecursive(2);
-binTree.insertRecursive(8);
-binTree.insertRecursive(9);
-console.log(binTree);
-binTree.printInOrder();
-
-var binTreeArr = new BST();
-var feederArr = [1, 2, 3, 4, 5, 6];
-binTreeArr.sortedArrToBST(feederArr);
-console.log(binTreeArr);
-binTreeArr.printInOrder();
