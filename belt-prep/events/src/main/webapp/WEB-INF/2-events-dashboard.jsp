@@ -10,12 +10,8 @@ uri="http://www.springframework.org/tags/form" %>
         <!--  UTF AND TITLE -->
         <meta charset="UTF-8" />
         <title>ASSIGNMENT</title>
-
         <!-- for Bootstrap CSS -->
-        <link
-            rel="stylesheet"
-            href="/webjars/bootstrap/css/bootstrap.min.css"
-        />
+        <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css"/>
         <!-- YOUR own local CSS -->
         <link rel="stylesheet" type="text/css" href="/css/style.css" />
         <!-- For any Bootstrap that uses JS or jQuery-->
@@ -26,22 +22,18 @@ uri="http://www.springframework.org/tags/form" %>
         <div class="d-flex justify-content-around">
             <h1>EVENT DASHBOARD</h1>
         </div>
-        <!-- NAV ELEMENTS -->
+        
         <div class="d-flex justify-content-around mb-3">
             <a href="/events">Event Dashboard</a>
             <a href="/logout">Logout</a>
         </div>
 
-        <!-- BODY -->
-        <!-- Header -->
         <h1 class="mb-3">
             Welcome, <c:out value="${currentUser.firstName}" />
         </h1>
 
-        <!-- Events in the state -->
         <div class="mb-3">
             <p>Here are some of the events in your state</p>
-            <!-- TABLE -->
             <table class="table table-striped">
                 <thead>
                     <tr>
@@ -53,60 +45,32 @@ uri="http://www.springframework.org/tags/form" %>
                     </tr>
                 </thead>
                 <tbody>
-                    <c:forEach
-                        items="${eventsInState}"
-                        var="singleEvent"
-                        varStatus="loop"
-                    >
+                    <c:forEach items="${eventsInState}" var="singleEvent" varStatus="loop" >
                         <tr>
                             <td><c:out value="${singleEvent.name}" /></td>
                             <td>
-                                <fmt:formatDate
-                                    pattern="MMMM d, yyyy"
-                                    value="${singleEvent.eventDate}"
-                                />
+                                <fmt:formatDate pattern="MMMM d, yyyy" value="${singleEvent.eventDate}" />
                             </td>
                             <td><c:out value="${singleEvent.eventCity}" /></td>
                             <td>
-                                <c:out
-                                    value="${singleEvent.getHost().getFirstName()}"
-                                />
+                                <c:out value="${singleEvent.getHost().getFirstName()}"/>
                             </td>
                             <c:choose>
-                                <!-- If User is  The Host -->
-                                <c:when
-                                    test="${singleEvent.getHost() == currentUser}"
-                                >
+                                <c:when test="${singleEvent.getHost() == currentUser}">
                                     <td>
-                                        <a href="events/${singleEvent.id}/edit"
-                                            >Edit</a
-                                        >
-                                        <a
-                                            href="events/${singleEvent.id}/delete"
-                                            >Delete</a
-                                        >
+                                        <a href="events/${singleEvent.id}/edit">Edit</a>
+                                        <a href="events/${singleEvent.id}/delete">Delete</a>
                                     </td>
                                 </c:when>
-                                <!-- If User is NOT The Host -->
                                 <c:otherwise>
                                     <td>
                                         <c:choose>
-                                            <!--  If they're already attending, allow them to not attend -->
-                                            <c:when
-                                                test="${singleEvent.getAttendees().contains(currentUser)}"
-                                            >
+                                            <c:when test="${singleEvent.getAttendees().contains(currentUser)}">
                                                 <p>Attending</p>
-                                                <a
-                                                    href="/events/${singleEvent.id}/remove/{currentUser}"
-                                                    >Cancel</a
-                                                >
+                                                <a href="/events/${singleEvent.id}/remove/{currentUser}">Cancel</a>
                                             </c:when>
-                                            <!--  If they're NOT already attending, allow them to attend -->
                                             <c:otherwise>
-                                                <a
-                                                    href="/events/${eventInState.id}/add/{currentUser}"
-                                                    >Join</a
-                                                >
+                                                <a href="/events/${eventInState.id}/add/{currentUser}">Join</a>
                                             </c:otherwise>
                                         </c:choose>
                                     </td>
@@ -118,7 +82,6 @@ uri="http://www.springframework.org/tags/form" %>
             </table>
         </div>
 
-        <!-- Events out of the state-->
         <div class="mb-3">
             <p>Here are some events in other states</p>
             <table class="table table-striped">
@@ -133,60 +96,33 @@ uri="http://www.springframework.org/tags/form" %>
                     </tr>
                 </thead>
                 <tbody>
-                    <c:forEach
-                        items="${eventsNotInState}"
-                        var="thisEvent"
-                        varStatus="loop"
-                    >
+                    <c:forEach items="${eventsNotInState}" var="thisEvent" varStatus="loop" >
                         <tr>
                             <td><c:out value="${thisEvent.name}" /></td>
                             <td>
-                                <fmt:formatDate
-                                    pattern="MMMM d, yyyy"
-                                    value="${thisEvent.eventDate}"
-                                />
+                                <fmt:formatDate pattern="MMMM d, yyyy" value="${thisEvent.eventDate}"/>
                             </td>
                             <td><c:out value="${thisEvent.eventCity}" /></td>
                             <td><c:out value="${thisEvent.eventState}" /></td>
                             <td>
-                                <c:out
-                                    value="${thisEvent.getHost().getFirstName()}"
-                                />
+                                <c:out value="${thisEvent.getHost().getFirstName()}"/>
                             </td>
                             <c:choose>
-                                <!-- If User is  The Host -->
-                                <c:when
-                                    test="${thisEvent.getHost() == currentUser}"
-                                >
+                                <c:when test="${thisEvent.getHost() == currentUser}">
                                     <td>
-                                        <a href="events/${thisEvent.id}/edit"
-                                            >Edit</a
-                                        >
-                                        <a href="events/${thisEvent.id}/delete"
-                                            >Delete</a
-                                        >
+                                        <a href="events/${thisEvent.id}/edit">Edit</a>
+                                        <a href="events/${thisEvent.id}/delete" >Delete</a>
                                     </td>
                                 </c:when>
-                                <!-- If User is NOT The Host -->
                                 <c:otherwise>
                                     <td>
                                         <c:choose>
-                                            <!--  If they're already attending, allow them to not attend -->
-                                            <c:when
-                                                test="${thisEvent.getAttendees().contains(currentUser)}"
-                                            >
+                                            <c:when test="${thisEvent.getAttendees().contains(currentUser)}">
                                                 <p>Attending</p>
-                                                <a
-                                                    href="/events/${thisEvent.id}/remove/{currentUser}"
-                                                    >Cancel</a
-                                                >
+                                                <a href="/events/${thisEvent.id}/remove/{currentUser}">Cancel</a>
                                             </c:when>
-                                            <!--  If they're NOT already attending, allow them to attend -->
                                             <c:otherwise>
-                                                <a
-                                                    href="/events/${thisEvent.id}/add/{currentUser}"
-                                                    >Join</a
-                                                >
+                                                <a href="/events/${thisEvent.id}/add/{currentUser}">Join</a>
                                             </c:otherwise>
                                         </c:choose>
                                     </td>
@@ -197,7 +133,7 @@ uri="http://www.springframework.org/tags/form" %>
                 </tbody>
             </table>
         </div>
-        <!-- CREATE EVENT FORM -->
+
         <div class="w-50">
             <h3>Create an Event</h3>
             <form:form
@@ -205,13 +141,11 @@ uri="http://www.springframework.org/tags/form" %>
                 action="/events/new"
                 modelAttribute="event"
             >
-                <!--  User ID -->
                 <form:input
                     type="hidden"
                     path="host"
                     value="${currentUser.id}"
                 />
-                <!-- Event Name -->
                 <div class="d-flex justify-content-between gap-2 w-100 mb-2">
                     <label> Event Name: </label>
                     <div class="w-50">
@@ -223,8 +157,6 @@ uri="http://www.springframework.org/tags/form" %>
                         <form:errors path="name" class="text-danger" />
                     </div>
                 </div>
-
-                <!-- Event Date -->
                 <div class="d-flex justify-content-between gap-2 w-100 mb-2">
                     <label>Date: </label>
                     <div class="w-50">
@@ -236,8 +168,6 @@ uri="http://www.springframework.org/tags/form" %>
                         <form:errors path="eventDate" class="text-danger" />
                     </div>
                 </div>
-
-                <!-- Event City & State-->
                 <div class="d-flex justify-content-between w-100 mb-2">
                     <label>Location </label>
 
@@ -248,14 +178,12 @@ uri="http://www.springframework.org/tags/form" %>
                             placeholder="city"
                         />
                         <form:errors path="eventCity" class="text-danger" />
-                        <!-- Event State  in same div-->
                         <form:select path="eventState">
                             <c:forEach
                                 items="${listOfStateCodes}"
                                 var="stateCode"
                                 varStatus="loop"
                             >
-                                <!--  PRE-SELECT THE CURRENT USER'S HOME STATE -->
                                 <c:if test="${stateCode == currentUser.state}">
                                     <form:option
                                         value="${stateCode}"
@@ -264,9 +192,7 @@ uri="http://www.springframework.org/tags/form" %>
                                         <c:out value="${stateCode}"></c:out>
                                     </form:option>
                                 </c:if>
-                                <!--  THE REST OF THE STATES -->
                                 <form:option value="${stateCode}">
-                                    <!-- 1 Name format for testing  -->
                                     <c:out value="${stateCode}"></c:out>
                                 </form:option>
                             </c:forEach>
@@ -277,8 +203,6 @@ uri="http://www.springframework.org/tags/form" %>
                         </form:select>
                     </div>
                 </div>
-
-                <!-- Submit -->
                 <div class="d-flex align-items-end flex-column">
                     <button class="btn btn-primary" type="submit">
                         Create
