@@ -1,5 +1,6 @@
 package com.kara.events.services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,22 +23,29 @@ public class EventService {
 	}
 
 	public List<Event> findAllByState(String includeState) {
+		List<Event> returnEvent = new ArrayList<Event>();
 		List<Event> allEvents = this.getAll();
 		for(Event eachEvent : allEvents) {
-			if(eachEvent.getEventState() == includeState) {
-				allEvents.remove(eachEvent);
+			if(eachEvent.getEventState().equals(includeState)) {
+				returnEvent.add(eachEvent);
 			}
 		}
-		return allEvents;
+		return returnEvent;
 	}
 
 	public List<Event> findAllNotInState(String excludeState) {
+		List<Event> returnEvent = new ArrayList<Event>();
 		List<Event> allEvents = this.getAll();
 		for(Event eachEvent : allEvents) {
-			if(eachEvent.getEventState() == excludeState) {
-				allEvents.remove(eachEvent);
+			if(!eachEvent.getEventState().equals(excludeState)) {
+				returnEvent.add(eachEvent);
 			}
 		}
-		return allEvents;
+		return returnEvent;
+	}
+
+	public void addEvent(Event event) {
+		eventRepository.save(event);
+		
 	}
 }

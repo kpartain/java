@@ -18,7 +18,12 @@ import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.sun.istack.NotNull;
 
 @Entity
 @Table(name="events")
@@ -33,15 +38,16 @@ public class Event {
     private String name;
     
     //ATTRIBUTE DATE OF EVENT
-    @NotEmpty(message="Event date is required!")
+    @NotNull
+    @DateTimeFormat(pattern ="yyyy-MM-dd")
     private Date eventDate;
     
     //ATTRIBUTE LOCATION CITY
-    @NotEmpty(message="Event city is required!")
+    @NotBlank(message="Event city is required!")
     private String eventCity;
     
     //ATTRIBUTE LOCATION STATE
-    @NotEmpty(message="Event state is required!")
+    @NotBlank(message="Event state is required!")
     private String eventState;
     
     //ATTRIBUTE HOST (one user can host many events, each event can have one host)
@@ -52,7 +58,7 @@ public class Event {
     //ATTRIBUTE ATTENDEES (one event can have many users, one user can attend many events)
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
-            name = "events_users", 
+            name = "attendees", 
             joinColumns = @JoinColumn(name = "event_id"), 
             inverseJoinColumns = @JoinColumn(name = "user_id")
     )
@@ -72,12 +78,11 @@ public class Event {
     	//bean
     }
     //POJO
-    public Event(String name, Date eventDate, String eventCity, String eventState, User host){
+    public Event(String name, Date eventDate, String eventCity, String eventState){
     	this.name = name;
     	this.eventDate = eventDate;
     	this.eventCity = eventCity;
     	this.eventState = eventState;
-    	this.host = host;
     }
     
     //Created/Updated
@@ -103,7 +108,12 @@ public class Event {
 	public void setMessages(List<Message> messages) {
 		this.messages = messages;
 	}
-	
+	public User getHost() {
+		return host;
+	}
+	public void setHost(User host) {
+		this.host = host;
+	}
     
     //Others
 	public Long getId() {
@@ -136,12 +146,7 @@ public class Event {
 	public void setEventState(String eventState) {
 		this.eventState = eventState;
 	}
-	public User getHost() {
-		return host;
-	}
-	public void setHost(User host) {
-		this.host = host;
-	}
+	
 	public Date getCreatedAt() {
 		return createdAt;
 	}

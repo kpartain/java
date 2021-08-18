@@ -84,7 +84,7 @@ public class User {
 	//MANY USERS CAN ATTEND MANY EVENTS
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
-            name = "events_users", 
+            name = "attendees", 
             joinColumns = @JoinColumn(name = "user_id"), 
             inverseJoinColumns = @JoinColumn(name = "event_id")
     )

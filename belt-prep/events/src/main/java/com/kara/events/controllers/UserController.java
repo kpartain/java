@@ -30,7 +30,10 @@ public class UserController {
 	private UserService userServ;
 	
 	@GetMapping("/")
-	public String index(Model model) {
+	public String index(Model model, HttpSession session) {
+		if(session.getAttribute("user_id") != null ) {
+			return "redirect:/events";
+		}
 		model.addAttribute("listOfStateCodes", stateCodes);
 	    model.addAttribute("newUser", new User());
 	    model.addAttribute("newLogin", new LoginUser());
@@ -40,6 +43,9 @@ public class UserController {
 	@PostMapping("/register")
 	public String register(@Valid @ModelAttribute("newUser") User newUser, 
 	        BindingResult result, Model model, HttpSession session) {
+		if(session.getAttribute("user_id") != null ) {
+			return "redirect:/events";
+		}
 	    userServ.register(newUser, result);
 	    if(result.hasErrors()) {
 	        model.addAttribute("newLogin", new LoginUser());
@@ -52,6 +58,9 @@ public class UserController {
 	@PostMapping("/login")
 	public String login(@Valid @ModelAttribute("newLogin") LoginUser newLogin, 
 	        BindingResult result, Model model, HttpSession session) {
+		if(session.getAttribute("user_id") != null ) {
+			return "redirect:/events";
+		}
 	    User user = userServ.login(newLogin, result);
 	    if(result.hasErrors()) {
 	    	model.addAttribute("listOfStateCodes", stateCodes);
