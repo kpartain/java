@@ -54,7 +54,9 @@ public class UserController {
 	        BindingResult result, Model model, HttpSession session) {
 	    User user = userServ.login(newLogin, result);
 	    if(result.hasErrors()) {
+	    	model.addAttribute("listOfStateCodes", stateCodes);
 	        model.addAttribute("newUser", new User());
+	        model.addAttribute("loginErrors", "Email or password are incorrect, unable to log in.");
 	        return "1-login-register.jsp";
 	    }
 	    session.setAttribute("user_id",  user.getId());

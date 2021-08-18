@@ -39,12 +39,14 @@ public class UserService {
         }
         Optional<User> potentialUser = userRepo.findByEmail(newLogin.getEmail());
         if(!potentialUser.isPresent()) {
-            result.rejectValue("email", "Unique", "Unknown email!");
+        	//left blank so can't determine errant field 
+            result.rejectValue("email", "Unique", "");
             return null;
         }
         User user = potentialUser.get();
         if(!BCrypt.checkpw(newLogin.getPassword(), user.getPassword())) {
-            result.rejectValue("password", "Matches", "Invalid Password!");
+        	//left blank so can't determine errant field 
+            result.rejectValue("password", "Matches", "");
         }
         if(result.hasErrors()) {
             return null;

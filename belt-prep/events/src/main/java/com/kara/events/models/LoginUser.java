@@ -7,11 +7,11 @@ import javax.validation.constraints.Size;
 public class LoginUser {
     
     @NotEmpty(message="Email is required!")
-    @Email(message="Please enter a valid email!")
+    @Email(message="Email must match standard format: email@site.com")
     private String email;
     
     @NotEmpty(message="Password is required!")
-    @Size(min=8, max=128, message="Password must be between 8 and 128 characters")
+    @Size(min=8, max=128, message="Password must be between 8-128 characters.")
     private String password;
     
     public LoginUser() {

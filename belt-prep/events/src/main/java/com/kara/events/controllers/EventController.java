@@ -38,6 +38,7 @@ public class EventController {
 		Long currentUsersID = (Long) session.getAttribute("user_id");
 		User thisUser = userService.findById(currentUsersID);
 		model.addAttribute("currentUser", thisUser);
+		model.addAttribute("usersName", thisUser.getFirstName());
 		
 		//Form: states and object for data bind - set the host to the current logged in user
 		Event newEvent = new Event();

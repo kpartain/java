@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>    
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<!-- NEED THIS FOR DATE FORMATTING -->
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,21 +19,22 @@
 <!-- 	<script src="/webjars/jquery/jquery.min.js"></script>-->	
 <!-- 	<script src="/webjars/bootstrap/js/bootstrap.min.js"></script> -->
 </head>
-<body>
+<body class="mx-5">
 <div class="d-flex justify-content-around">
 <h1>EVENT DASHBOARD</h1>
 </div>
 	<!-- NAV ELEMENTS -->
-	<div class="d-flex justify-content-around">
+	<div class="d-flex justify-content-around mb-3">
 		<a href="/events">Event Dashboard</a>
 		<a href="/logout">Logout</a>
 	</div>
 	
 	<!-- BODY -->
 	<!-- Header -->
-	<h1>Welcome, <c:out value="${loggedInUserName}" /></h1>
+	<h1 class="mb-3">Welcome, <c:out value="${currentUser.firstName}" /></h1>
 	
 	<!-- Events in the state -->
+	<div class="mb-3">
 	<p>Here are some of the events in your state</p>
 	<!-- TABLE -->
 	<table class="table table-striped">
@@ -76,8 +79,10 @@
 		  </c:forEach>
 		  </tbody>
 	</table>
+	</div>
 	
 	<!-- Events out of the state-->
+	<div class="mb-3">
 	<p>Here are some events in other states</p>
 		<table class="table table-striped">
 		  <thead>
@@ -123,47 +128,64 @@
 		  </c:forEach>
 		  </tbody>
 	</table>
-	
-	<!-- Create -->
-	<form:form method="POST" action="/ninjas/new/post" modelAttribute="ninja">
+	</div>
+	<!-- CREATE EVENT FORM -->
+	<div class="w-50">
+	<h3>Create an Event</h3>
+	<form:form method="POST" action="/events" modelAttribute="event">
 		<!-- Event Name -->
-		<div class="d-flex justify-content-around">
+		<div class="d-flex justify-content-between gap-2 w-100 mb-2">
 			<label> Event Name:  </label>
-			<form:input path="name" class="w-50"/>
-			<form:errors path="name" class="text-danger" />
+			<div class="w-50">
+				<form:input path="name" class="form-control" placeholder="event name"/>
+				<form:errors path="name" class="text-danger" />
+			</div>
 		</div>
 		
 		<!-- Event Date -->
-		<div class="d-flex justify-content-around">
+		<div class="d-flex justify-content-between gap-2 w-100 mb-2">
 			<label>Date: </label>
-			<form:input type="date" path="date" class="w-50"/>
-			<form:errors path="date" class="text-danger" />
+			<div class="w-50">
+				<input type="date" name="${form.event.eventDate}" class="form-control"/>
+				<form:errors path="eventDate" class="text-danger" />
+			</div>
 		</div>
 		
 		<!-- Event City & State-->
-		<div class="d-flex justify-content-around">
-			<label>City </label>
-			<form:input path="city" class="w-50"/>
-			<form:errors path="city" class="text-danger" />
+		<div class="d-flex justify-content-between w-100 mb-2">
+			<label>Location </label>
+			
+			<div class="d-flex w-50">
+			<form:input path="eventCity" class="form-control" placeholder="city"/>
+			<form:errors path="eventCity" class="text-danger" />
 			<!-- Event State  in same div-->
-			<form:select path="state" name="state">
+			<form:select path="eventState"  >
 	  			<c:forEach items="${listOfStateCodes}" var="stateCode"  varStatus="loop">
-	  				<!--  the VALUE is the entire DOJO OBJECT! -->
-	    			<form:option value="${stateCode}">
+	  				<!--  PRE-SELECT THE CURRENT USER'S HOME STATE -->
+	  				<c:if test="${stateCode == currentUser.state}">
+	  				<form:option value="${stateCode}"  selected="$currentUser.state}">
+	        			<c:out value="${stateCode}"></c:out>
+	    			</form:option>
+	  				</c:if>
+	  				<!--  THE REST OF THE STATES -->
+	    			<form:option value="${stateCode}" >
 	    				<!-- 1 Name format for testing  -->
 	        			<c:out value="${stateCode}"></c:out>
 	    			</form:option>
 	  			</c:forEach>
-	  			<form:errors path="state" class="text-danger" />
+	  			<form:errors path="eventState" class="text-danger" />
 			</form:select>
+			</div>
+			
 		</div>
 	
 		<!-- Submit -->
-		<div class="d-flex align-items-end flex-column px-5 mx-5 mt-3">
-			<button class="btn btn-primary mx-5 px-5" type="submit">Create</button>
+		<div class="d-flex align-items-end flex-column">
+			<button class="btn btn-primary" type="submit">Create</button>
 		</div>
 	
 	</form:form>
+	</div>
 	
 </body>
 </html>
