@@ -155,31 +155,51 @@ class BST {
         if (node == null) {
             return 0;
         }
-        var leftCount = this.size(node.left) + 1; //root
-        var rightCount = this.size(node.right) + 1; //root
+        var leftCount = this.height(node.left); //root
+        var rightCount = this.height(node.right); //root
         if (leftCount == rightCount) {
-            return console.log("Both sides are equal at ", leftCount);
+            return leftCount + 1;
+        } else if (leftCount > rightCount) {
+            return leftCount + 1;
+        } else {
+            return rightCount + 1;
         }
-        return leftCount > rightCount
-            ? console.log("Left side is longer at", leftCount)
-            : console.log("Right side is longer at", rightCount);
     }
 }
-
+console.log("BINTREE ONE********************************");
 var binTree = new BST();
-binTree.insertRecursive(5);
-binTree.insertRecursive(7);
-binTree.insertRecursive(6);
-binTree.insertRecursive(1);
-binTree.insertRecursive(4);
-binTree.insertRecursive(3);
-binTree.insertRecursive(2);
-binTree.insertRecursive(8);
-binTree.insertRecursive(9);
-console.log(binTree);
-console.log(binTree.size());
-binTree.height();
-binTree.insertRecursive(20);
-binTree.insertRecursive(40);
-binTree.insertRecursive(50);
-binTree.height();
+binTree.insertRecursive(5); //1
+binTree.insertRecursive(7); //2
+binTree.insertRecursive(6); //3
+binTree.insertRecursive(1); //4
+binTree.insertRecursive(4); //5
+binTree.insertRecursive(3); //6
+binTree.insertRecursive(2); //7
+binTree.insertRecursive(8); //8
+binTree.insertRecursive(9); //9
+console.log("SIZE before:", binTree.size());
+console.log("HEIGHT before:", binTree.height());
+binTree.insertRecursive(20); //10
+binTree.insertRecursive(40); //11
+binTree.insertRecursive(50); //12
+console.log("SIZE after:", binTree.size());
+console.log("HEIGHT after:", binTree.height());
+
+console.log("BINTREE TWO********************************");
+var binTree2 = new BST();
+binTree2.insertRecursive(5);
+binTree2.insertRecursive(2);
+binTree2.insertRecursive(1);
+binTree2.insertRecursive(30);
+binTree2.insertRecursive(4);
+binTree2.insertRecursive(8);
+binTree2.insertRecursive(6);
+binTree2.insertRecursive(12);
+binTree2.insertRecursive(9);
+console.log("SIZE before:", binTree2.size());
+console.log("HEIGHT before:", binTree2.height());
+binTree2.insertRecursive(0);
+binTree2.insertRecursive(40);
+binTree2.insertRecursive(20);
+console.log("SIZE after:", binTree2.size());
+console.log("HEIGHT after:", binTree2.height());
