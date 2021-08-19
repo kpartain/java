@@ -48,6 +48,7 @@ public class UserController {
 		}
 	    userServ.register(newUser, result);
 	    if(result.hasErrors()) {
+	    	model.addAttribute("listOfStateCodes", stateCodes);
 	        model.addAttribute("newLogin", new LoginUser());
 	        return "1-login-register.jsp";
 	    }

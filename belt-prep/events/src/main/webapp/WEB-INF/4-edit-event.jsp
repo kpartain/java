@@ -46,7 +46,7 @@ uri="http://www.springframework.org/tags/form" %>
                 <div class="d-flex justify-content-between gap-2 w-100 mb-2">
                     <label>Date: </label>
                     <div class="w-50">
-                        <form:input path="eventDate" type="date" class="form-control" value="${event.getEventDate()}" placeholder="${event.getEventDate()}"/>
+                        <form:input path="eventDate" type="date" class="form-control" />
                         <form:errors path="eventDate" class="text-danger" />
                     </div>
                 </div>

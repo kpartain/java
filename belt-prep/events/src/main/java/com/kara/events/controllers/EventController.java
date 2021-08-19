@@ -171,10 +171,15 @@ public class EventController {
     	User thisUser = userService.findById(currentUsersID);
     	model.addAttribute("currentUser", thisUser);
 		Event thisEvent = eventService.findById(id);
-		model.addAttribute("event", thisEvent);
-		model.addAttribute("listOfStateCodes", stateCodes);
-		//DATE???
-		return "4-edit-event.jsp";
+		if(thisEvent.getHost().equals(thisUser)) {
+			System.out.println(id);
+			model.addAttribute("event", thisEvent);
+			model.addAttribute("listOfStateCodes", stateCodes);
+			return "4-edit-event.jsp";
+		} else {
+			return "redirect:/events";
+		}
+		
 	}
 	
 	//edit event page POST
