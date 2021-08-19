@@ -1,0 +1,15 @@
+#messagewall {
+	height: 20vh;
+	width: 30vw;
+	padding:3px; 
+	border: 1px solid black;
+}
+#messagecontent {
+	height: 100%;
+	margin: 0em;
+	overflow-y: auto;
+}
+#messageinput{
+	width: 30vw;
+	height: 5vh;
+}

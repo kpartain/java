@@ -47,7 +47,7 @@ uri="http://www.springframework.org/tags/form" %>
                 <tbody>
                     <c:forEach items="${eventsInState}" var="singleEvent" varStatus="loop" >
                         <tr>
-                            <td><c:out value="${singleEvent.name}" /></td>
+                            <td><a href="/events/${singleEvent.id}"><c:out value="${singleEvent.name}" /></a></td>
                             <td>
                                 <fmt:formatDate pattern="MMMM d, yyyy" value="${singleEvent.eventDate}" />
                             </td>
@@ -58,8 +58,8 @@ uri="http://www.springframework.org/tags/form" %>
                             <c:choose>
                                 <c:when test="${singleEvent.getHost() == currentUser}">
                                     <td>
-                                        <a href="events/${singleEvent.id}/edit">Edit</a>
-                                        <a href="events/${singleEvent.id}/delete">Delete</a>
+                                        <a href="/events/${singleEvent.id}/edit">Edit</a>
+                                        <a href="/events/${singleEvent.id}/delete">Delete</a>
                                     </td>
                                 </c:when>
                                 <c:otherwise>
@@ -98,7 +98,7 @@ uri="http://www.springframework.org/tags/form" %>
                 <tbody>
                     <c:forEach items="${eventsNotInState}" var="thisEvent" varStatus="loop" >
                         <tr>
-                            <td><c:out value="${thisEvent.name}" /></td>
+                            <td><a href="/events/${thisEvent.id}"><c:out value="${thisEvent.name}" /></a></td>
                             <td>
                                 <fmt:formatDate pattern="MMMM d, yyyy" value="${thisEvent.eventDate}"/>
                             </td>
@@ -110,8 +110,8 @@ uri="http://www.springframework.org/tags/form" %>
                             <c:choose>
                                 <c:when test="${thisEvent.getHost() == currentUser}">
                                     <td>
-                                        <a href="events/${thisEvent.id}/edit">Edit</a>
-                                        <a href="events/${thisEvent.id}/delete" >Delete</a>
+                                        <a href="/events/${thisEvent.id}/edit">Edit</a>
+                                        <a href="/events/${thisEvent.id}/delete" >Delete</a>
                                     </td>
                                 </c:when>
                                 <c:otherwise>
@@ -136,59 +136,31 @@ uri="http://www.springframework.org/tags/form" %>
 
         <div class="w-50">
             <h3>Create an Event</h3>
-            <form:form
-                method="POST"
-                action="/events/new"
-                modelAttribute="event"
-            >
-                <form:input
-                    type="hidden"
-                    path="host"
-                    value="${currentUser.id}"
-                />
+            <form:form method="POST" action="/events/new" modelAttribute="event">
+                <form:input type="hidden" path="host" value="${currentUser.id}"/>
                 <div class="d-flex justify-content-between gap-2 w-100 mb-2">
                     <label> Event Name: </label>
                     <div class="w-50">
-                        <form:input
-                            path="name"
-                            class="form-control"
-                            placeholder="event name"
-                        />
+                        <form:input path="name" class="form-control" placeholder="event name"/>
                         <form:errors path="name" class="text-danger" />
                     </div>
                 </div>
                 <div class="d-flex justify-content-between gap-2 w-100 mb-2">
                     <label>Date: </label>
                     <div class="w-50">
-                        <form:input
-                            path="eventDate"
-                            type="date"
-                            class="form-control"
-                        />
+                        <form:input path="eventDate" type="date" class="form-control"/>
                         <form:errors path="eventDate" class="text-danger" />
                     </div>
                 </div>
                 <div class="d-flex justify-content-between w-100 mb-2">
                     <label>Location </label>
-
                     <div class="d-flex w-50">
-                        <form:input
-                            path="eventCity"
-                            class="form-control"
-                            placeholder="city"
-                        />
+                        <form:input  path="eventCity" class="form-control" placeholder="city"/>
                         <form:errors path="eventCity" class="text-danger" />
                         <form:select path="eventState">
-                            <c:forEach
-                                items="${listOfStateCodes}"
-                                var="stateCode"
-                                varStatus="loop"
-                            >
+                            <c:forEach items="${listOfStateCodes}" var="stateCode" varStatus="loop">
                                 <c:if test="${stateCode == currentUser.state}">
-                                    <form:option
-                                        value="${stateCode}"
-                                        selected="$currentUser.state}"
-                                    >
+                                    <form:option value="${stateCode}" selected="$currentUser.state}">
                                         <c:out value="${stateCode}"></c:out>
                                     </form:option>
                                 </c:if>
@@ -196,10 +168,7 @@ uri="http://www.springframework.org/tags/form" %>
                                     <c:out value="${stateCode}"></c:out>
                                 </form:option>
                             </c:forEach>
-                            <form:errors
-                                path="eventState"
-                                class="text-danger"
-                            />
+                            <form:errors path="eventState" class="text-danger" />
                         </form:select>
                     </div>
                 </div>

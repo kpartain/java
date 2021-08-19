@@ -11,13 +11,16 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.kara.events.models.Event;
+import com.kara.events.models.Message;
 import com.kara.events.models.USStates;
 import com.kara.events.models.User;
 import com.kara.events.services.EventService;
+import com.kara.events.services.MessageService;
 import com.kara.events.services.UserService;
 
 @Controller
@@ -33,6 +36,9 @@ public class EventController {
 	
 	@Autowired
 	private UserService userService;
+	
+	@Autowired 
+	private MessageService messageService;
 	
 	//EVENTS DASHBOARD: table of events in your state. table of events NOT in your state. form to add a new event.
 	@GetMapping("")
@@ -76,11 +82,64 @@ public class EventController {
 				return "redirect:/events";
 			}
 	}
+	
 	//delete event
+	@RequestMapping("/{id}/delete")
+    public String deleteSingleEvent(@PathVariable("id") Long id, HttpSession session) {
+		Long currentUsersID = (Long) session.getAttribute("user_id");
+    	Event thisEvent = eventService.findById(id);
+    	System.out.println(id);
+    	System.out.println(currentUsersID);
+    	User thisUser = userService.findById(currentUsersID);
+    	if(thisEvent.getHost().equals(thisUser)) {
+    		eventService.delete(thisEvent);
+    		return "redirect:/events";
+    	} else {
+    		System.out.println("Unable to delete someone else's event");
+    		return "redirect:/events";
+    	}
+    	
+    }
 	
 	//attend event
 	
 	//un-attend event
+	
+	//show page
+	@GetMapping("/{id}")
+	public String showPageEvent(@PathVariable("id")Long id, HttpSession session, Model model) {
+		Long currentUsersID = (Long) session.getAttribute("user_id");
+    	User thisUser = userService.findById(currentUsersID);
+    	Event thisEvent = eventService.findById(id);
+    	System.out.println(id);
+    	System.out.println(currentUsersID);
+    	model.addAttribute("currentUser", thisUser);
+    	model.addAttribute("event", thisEvent);
+    	Message newMessage = new Message();
+    	model.addAttribute("newmessage", newMessage);
+    	return "3-events-show-page.jsp";
+	}
+	
+	//add a comment
+	@RequestMapping(value="/{id}/post-message", method=RequestMethod.POST)
+	public String addAComment(@Valid @ModelAttribute("newmessage") Message newmessage, @PathVariable("id")Long id, BindingResult result, Model model, HttpSession session) {
+		if(result.hasErrors()) {
+			//same logic for show page
+			Long currentUsersID = (Long) session.getAttribute("user_id");
+	    	User thisUser = userService.findById(currentUsersID);
+	    	Event thisEvent = eventService.findById(id);
+	    	System.out.println(id);
+	    	System.out.println(currentUsersID);
+	    	model.addAttribute("currentUser", thisUser);
+	    	model.addAttribute("event", thisEvent);
+	    	Message newMessage = new Message();
+	    	model.addAttribute("newmessage", newMessage);
+	    	return "3-events-show-page.jsp";
+		} else {
+			messageService.save(newmessage);
+			return "redirect:/events"+id;
+		}
+	}
 	
 	//edit event page render
 	

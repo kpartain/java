@@ -2,6 +2,7 @@ package com.kara.events.services;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -48,4 +49,20 @@ public class EventService {
 		eventRepository.save(event);
 		
 	}
+	
+	public Event findById(Long id) {
+		Optional<Event> foundItem = eventRepository.findById(id);
+		if(foundItem.isPresent()) {
+			return foundItem.get();
+		} else {
+			System.out.println("Not found in Service");
+			return null;
+		}
+	}
+	
+	public void delete(Event thisEvent) {
+		eventRepository.delete(thisEvent);
+	}
+	
+	
 }

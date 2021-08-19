@@ -2,6 +2,7 @@
 pageEncoding="UTF-8"%> <%@ taglib prefix="c"
 uri="http://java.sun.com/jsp/jstl/core" %> <%@ taglib prefix="form"
 uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -21,21 +22,75 @@ uri="http://www.springframework.org/tags/form" %>
         <!-- 	<script src="/webjars/bootstrap/js/bootstrap.min.js"></script> -->
     </head>
     <body>
+    
         <div class="d-flex justify-content-around">
-            <h1>EDIT SHOW PAGE</h1>
+            <h1> SHOW PAGE</h1>
         </div>
-        <!-- NAV ELEMENTS -->
+        
         <div class="d-flex justify-content-around">
             <a href="/events">Event Dashboard</a>
             <a href="/logout">Logout</a>
         </div>
 
-        <!-- BODY -->
-        <!--  -->
-        <!--  -->
-        <!--  -->
-        <!--  -->
-        <!--  -->
-        <!--  -->
+       <div class="d-flex justify-content-between p-5 gap-3">
+
+        <div>
+                <h3>Event Name: <c:out value="${event.name}" /></h3>
+                <p>Host: <c:out value="${event.getHost().firstName}" /> <c:out value="${event.getHost().lastName}" /></p>
+                <p>Date: <fmt:formatDate pattern="MMMM d, yyyy" value="${thisEvent.eventDate}"/></p>
+                <p>Location: <c:out value="${event.eventCity}" />, <c:out value="${event.eventState}" /></p>
+                <p>Number of Attendees: ADD LOGIC</p>
+                 <table class="table table-striped">
+                 <thead>
+                 <tr>
+                 <th scope="col">Name</th>
+                 <th scope="col">Name</th>
+                 </tr>
+                 </thead>
+                 <tbody>
+                 <tr>
+                 <td>John Doe</td>
+                 <td>CITY</td>
+                 </tr>
+                 </tbody>
+                 </table>
+        </div>
+        
+        <div class="align-self-center">
+                <h3>Message Wall</h3>
+                <div id="messagewall">
+		                <div id="messagecontent">
+		                <ul>
+		                <c:forEach items="${event.getMessages()}" var="singleMessage" varStatus="loop">
+		                <li>
+		                	<p>
+		                	<c:out value="${singleMessage.getAuthor().firstName}"></c:out> says: 
+		                	<c:out value="${singleMessage.message}"></c:out>
+		                	</p>
+		                </li>
+		                <br>
+		                <p>**********************</p>
+		                </c:forEach>
+		                </ul>
+		                </div>
+          		</div>
+          		
+	           <div class="mt-3">
+	              <form:form method="POST" action="/events/{event.id}/post-message" modelAttribute="newmessage">
+	            	<form:input type="hidden" path="author" value="${currentUser.id}" />
+	            	<form:input type="hidden" path="event" value="${event.id}"/>
+	            	<p>Add Comment:</p>
+	            	<form:errors path="message" class="text-danger" />
+	            	<form:input type="textarea" path="message" id="messageinput"/>
+	            	<div class="mt-2">
+	            		<button class="btn btn-primary" type="submit">
+	                        Create
+	                    </button>
+	                </div>
+	            </form:form>
+	            </div>
+        </div>
+
+        </div>
     </body>
 </html>
