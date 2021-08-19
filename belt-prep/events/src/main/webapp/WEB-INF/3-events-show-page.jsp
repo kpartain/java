@@ -39,7 +39,7 @@ uri="http://www.springframework.org/tags/form" %>
                 <p>Host: <c:out value="${event.getHost().firstName}" /> <c:out value="${event.getHost().lastName}" /></p>
                 <p>Date: <fmt:formatDate pattern="MMMM d, yyyy" value="${event.eventDate}"/></p>
                 <p>Location: <c:out value="${event.eventCity}" />, <c:out value="${event.eventState}" /></p>
-                <p>Number of Attendees: ADD LOGIC</p>
+                <p>Number of Attendees: <c:out value="${event.getAttendees().size()}" /></p>
                  <table class="table table-striped">
                  <thead>
                  <tr>

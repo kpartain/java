@@ -67,12 +67,12 @@ uri="http://www.springframework.org/tags/form" %>
                                         <c:choose>
                                             <c:when test="${singleEvent.getAttendees().contains(currentUser)}">
                                             <td>
-                                                <p>Attending | </p><a href="/events/${singleEvent.id}/remove/${currentUser.id}">Cancel</a></p>
+                                                <p>Attending | <a href="/events/${singleEvent.id}/remove/${currentUser.id}">Cancel</a></p>
                                                 </td>
                                             </c:when>
                                             <c:otherwise>
                                             <td>
-                                                <a href="/events/${eventInState.id}/add/${currentUser.id}">Join</a>
+                                                <a href="/events/${singleEvent.id}/add/${currentUser.id}">Join</a>
                                                 </td>
                                             </c:otherwise>
                                         </c:choose>

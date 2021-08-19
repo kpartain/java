@@ -1,5 +1,8 @@
 package com.kara.events.controllers;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -12,8 +15,10 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kara.events.models.Event;
 import com.kara.events.models.Message;
@@ -113,6 +118,15 @@ public class EventController {
 	}
 	
 	//un-attend event
+	@GetMapping("/{event_id}/remove/{user_id}")
+	public String userUnRSVP(@PathVariable("event_id")Long eventID, @PathVariable("user_id")Long userID) {
+		User thisUser = userService.findById(userID);
+		Event thisEvent = eventService.findById(eventID);
+		thisEvent.getAttendees().remove(thisUser);
+		//update/save are the same
+		eventService.addEvent(thisEvent);
+		return "redirect:/events";
+	}
 	
 	//show page
 	@GetMapping("/{id}")
@@ -151,6 +165,32 @@ public class EventController {
 	}
 	
 	//edit event page render
+	@GetMapping("/{id}/edit")
+	public String editSingleEvent(@PathVariable("id")Long id, Model model, HttpSession session) {
+		Long currentUsersID = (Long) session.getAttribute("user_id");
+    	User thisUser = userService.findById(currentUsersID);
+    	model.addAttribute("currentUser", thisUser);
+		Event thisEvent = eventService.findById(id);
+		model.addAttribute("event", thisEvent);
+		model.addAttribute("listOfStateCodes", stateCodes);
+		//DATE???
+		return "4-edit-event.jsp";
+	}
 	
 	//edit event page POST
+	@RequestMapping(value="/{id}/edit", method=RequestMethod.POST)
+	public String editEvent(@Valid @PathVariable("id") Long id, @ModelAttribute("event") Event event, BindingResult result, Model model, HttpSession session) {
+			if(result.hasErrors()) {
+				Long currentUsersID = (Long) session.getAttribute("user_id");
+		    	User thisUser = userService.findById(currentUsersID);
+		    	model.addAttribute("currentUser", thisUser);
+				model.addAttribute("event", eventService.findById(id));
+				model.addAttribute("listOfStateCodes", stateCodes);
+				return "edit.jsp";
+			}
+			else {
+				eventService.addEvent(event);
+				return "redirect:/events";
+			}
+	}
 }
