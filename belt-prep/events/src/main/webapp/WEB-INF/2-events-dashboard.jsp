@@ -63,17 +63,20 @@ uri="http://www.springframework.org/tags/form" %>
                                     </td>
                                 </c:when>
                                 <c:otherwise>
-                                    <td>
+                                    
                                         <c:choose>
                                             <c:when test="${singleEvent.getAttendees().contains(currentUser)}">
-                                                <p>Attending</p>
-                                                <a href="/events/${singleEvent.id}/remove/{currentUser}">Cancel</a>
+                                            <td>
+                                                <p>Attending | </p><a href="/events/${singleEvent.id}/remove/${currentUser.id}">Cancel</a></p>
+                                                </td>
                                             </c:when>
                                             <c:otherwise>
-                                                <a href="/events/${eventInState.id}/add/{currentUser}">Join</a>
+                                            <td>
+                                                <a href="/events/${eventInState.id}/add/${currentUser.id}">Join</a>
+                                                </td>
                                             </c:otherwise>
                                         </c:choose>
-                                    </td>
+                                    
                                 </c:otherwise>
                             </c:choose>
                         </tr>
@@ -115,17 +118,19 @@ uri="http://www.springframework.org/tags/form" %>
                                     </td>
                                 </c:when>
                                 <c:otherwise>
-                                    <td>
                                         <c:choose>
                                             <c:when test="${thisEvent.getAttendees().contains(currentUser)}">
-                                                <p>Attending</p>
-                                                <a href="/events/${thisEvent.id}/remove/{currentUser}">Cancel</a>
+                                            <td>
+                                                <p>Attending | <a href="/events/${thisEvent.id}/remove/${currentUser.id}">Cancel</a></p>
+                                                </td>
                                             </c:when>
                                             <c:otherwise>
-                                                <a href="/events/${thisEvent.id}/add/{currentUser}">Join</a>
+                                            <td>
+                                                <a href="/events/${thisEvent.id}/add/${currentUser.id}">Join</a>
+                                                </td>
                                             </c:otherwise>
                                         </c:choose>
-                                    </td>
+
                                 </c:otherwise>
                             </c:choose>
                         </tr>

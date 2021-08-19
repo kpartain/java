@@ -37,20 +37,22 @@ uri="http://www.springframework.org/tags/form" %>
         <div>
                 <h3>Event Name: <c:out value="${event.name}" /></h3>
                 <p>Host: <c:out value="${event.getHost().firstName}" /> <c:out value="${event.getHost().lastName}" /></p>
-                <p>Date: <fmt:formatDate pattern="MMMM d, yyyy" value="${thisEvent.eventDate}"/></p>
+                <p>Date: <fmt:formatDate pattern="MMMM d, yyyy" value="${event.eventDate}"/></p>
                 <p>Location: <c:out value="${event.eventCity}" />, <c:out value="${event.eventState}" /></p>
                 <p>Number of Attendees: ADD LOGIC</p>
                  <table class="table table-striped">
                  <thead>
                  <tr>
-                 <th scope="col">Name</th>
-                 <th scope="col">Name</th>
+                 <th scope="col">Attendee Name</th>
+                 <th scope="col">Visiting From</th>
                  </tr>
                  </thead>
                  <tbody>
                  <tr>
-                 <td>John Doe</td>
-                 <td>CITY</td>
+                 <c:forEach items="${event.getAttendees()}" var="singleAttendee" varStatus="loop">
+	                 <td><c:out value="${singleAttendee.firstName}" /> <c:out value="${singleAttendee.lastName}" /></td>
+	                 <td><c:out value="${singleAttendee.city}" />, <c:out value="${singleAttendee.state}" /></td>
+                 </c:forEach>
                  </tr>
                  </tbody>
                  </table>
@@ -60,7 +62,7 @@ uri="http://www.springframework.org/tags/form" %>
                 <h3>Message Wall</h3>
                 <div id="messagewall">
 		                <div id="messagecontent">
-		                <ul>
+		                <ul style="list-style-type:none;">
 		                <c:forEach items="${event.getMessages()}" var="singleMessage" varStatus="loop">
 		                <li>
 		                	<p>
@@ -76,7 +78,7 @@ uri="http://www.springframework.org/tags/form" %>
           		</div>
           		
 	           <div class="mt-3">
-	              <form:form method="POST" action="/events/{event.id}/post-message" modelAttribute="newmessage">
+	              <form:form method="POST" action="/events/${event.id}/post-message" modelAttribute="newmessage">
 	            	<form:input type="hidden" path="author" value="${currentUser.id}" />
 	            	<form:input type="hidden" path="event" value="${event.id}"/>
 	            	<p>Add Comment:</p>

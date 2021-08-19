@@ -102,6 +102,15 @@ public class EventController {
     }
 	
 	//attend event
+	@GetMapping("/{event_id}/add/{user_id}")
+	public String userRSVP(@PathVariable("event_id")Long eventID, @PathVariable("user_id")Long userID) {
+		User thisUser = userService.findById(userID);
+		Event thisEvent = eventService.findById(eventID);
+		thisEvent.getAttendees().add(thisUser);
+		//update/save are the same
+		eventService.addEvent(thisEvent);
+		return "redirect:/events";
+	}
 	
 	//un-attend event
 	
@@ -137,7 +146,7 @@ public class EventController {
 	    	return "3-events-show-page.jsp";
 		} else {
 			messageService.save(newmessage);
-			return "redirect:/events"+id;
+			return "redirect:/events/"+id;
 		}
 	}
 	
