@@ -157,13 +157,7 @@ class BST {
         }
         var leftCount = this.height(node.left); //root
         var rightCount = this.height(node.right); //root
-        if (leftCount == rightCount) {
-            return leftCount + 1;
-        } else if (leftCount > rightCount) {
-            return leftCount + 1;
-        } else {
-            return rightCount + 1;
-        }
+        return leftCount > rightCount? leftCount + 1 : rightCount + 1;
     }
 }
 console.log("BINTREE ONE********************************");
