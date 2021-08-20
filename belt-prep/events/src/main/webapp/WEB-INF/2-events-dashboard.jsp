@@ -165,7 +165,7 @@ uri="http://www.springframework.org/tags/form" %>
                         <form:select path="eventState">
                             <c:forEach items="${listOfStateCodes}" var="stateCode" varStatus="loop">
                                 <c:if test="${stateCode == currentUser.state}">
-                                    <form:option value="${stateCode}" selected="$currentUser.state}">
+                                    <form:option value="${stateCode}" selected="${currentUser.state}">
                                         <c:out value="${stateCode}"></c:out>
                                     </form:option>
                                 </c:if>
