@@ -354,47 +354,42 @@ class SinglyLinkedList {
      * - Space: (?).
      * @returns {SinglyLinkedList} This list after the negatives are removed.
      */
-    removeNegatives() {
+     removeNegatives() {
         //if empty
-        if (this.head == null) {
-            return false;
+        if (this.isEmpty() == true) {
+            console.log("EMPTY");
+            return this;
         }
-        var jogger = this.head;
-        var runner = this.head;
-        while (runner != null) {
-            if (runner.value < 0) {
-                jogger.next = runner.next;
-            }
-            jogger = jogger.next;
-            runner = jogger.next;
+        //if no head.next && head.value > -1
+        if(this.head.next == null && this.head.value > -1) {
+            console.log("EMPTY");
+            return this;
         }
+        //lagger leader
+        var lagger = this.head;
+        var leader = lagger.next;
+        //while leader is not null (traverses the entire list)
+        while(leader.next != null){
+          //if leader value is less than 0, assign laggers next to be leader next
+          if(leader.data < 0){
+            //reassign memory pointer for lagger's next to be the node after the negative value
+            console.log("HERE");
+            return lagger.next = leader.next;
+          }
+          //increment lagger and leader
+          lagger = lagger.next;
+          leader = leader.next;
+        }
+        //return the list - all negs should have been reassigned
         return this;
-    }
+      }
 }
 
-//multiple
-var sll = new SinglyLinkedList();
-var seeder = [1, 2, 3, 4, 5, 6, 7, 8];
-sll.seedFromArr(seeder);
-console.log("*************************BEFORE*************************");
-console.log(sll);
-sll.reverse();
-console.log("*************************AFTER*************************");
-console.log(sll);
-
-//1
-var sll2 = new SinglyLinkedList();
-sll2.insertAtFront(2);
-console.log("\n*************************BEFORE*************************");
-console.log(sll2);
-sll2.reverse();
-console.log("*************************AFTER*************************");
-console.log(sll2);
-
-//empty
-var sll3 = new SinglyLinkedList();
-console.log("\n*************************BEFORE*************************");
-console.log(sll3);
-sll3.reverse();
-console.log("*************************AFTER*************************");
-console.log(sll3);
+var t1 = new SinglyLinkedList();
+var seeder = [0,-1,3,4,-2];
+t1.seedFromArr(seeder);
+console.log("***************BEFORE*****************");
+console.log(t1);
+t1.removeNegatives();
+console.log("***************AFTER*****************");
+console.log(t1);
