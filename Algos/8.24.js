@@ -366,6 +366,11 @@ class SinglyLinkedList {
             return this;
         }
         //lagger leader
+        if(this.head.data <0 ){
+            while(this.head.data < 0){
+                this.head = this.head.next
+            }
+        }
         var lagger = this.head;
         var leader = lagger.next;
         //while leader is not null (traverses the entire list)
