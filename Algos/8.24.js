@@ -354,14 +354,14 @@ class SinglyLinkedList {
      * - Space: (?).
      * @returns {SinglyLinkedList} This list after the negatives are removed.
      */
-     removeNegatives() {
+    removeNegatives() {
         //if empty
         if (this.isEmpty() == true) {
             console.log("EMPTY");
             return this;
         }
         //if no head.next && head.value > -1
-        if(this.head.next == null && this.head.value > -1) {
+        if (this.head.next == null && this.head.value > -1) {
             console.log("EMPTY");
             return this;
         }
@@ -369,27 +369,70 @@ class SinglyLinkedList {
         var lagger = this.head;
         var leader = lagger.next;
         //while leader is not null (traverses the entire list)
-        while(leader.next != null){
-          //if leader value is less than 0, assign laggers next to be leader next
-          if(leader.data < 0){
-            //reassign memory pointer for lagger's next to be the node after the negative value
-            console.log("HERE");
-            return lagger.next = leader.next;
-          }
-          //increment lagger and leader
-          lagger = lagger.next;
-          leader = leader.next;
+        while (leader.next != null) {
+            //if leader value is less than 0, assign laggers next to be leader next
+            if (leader.data < 0) {
+                //reassign memory pointer for lagger's next to be the node after the negative value
+                return (lagger.next = leader.next);
+            }
+            //increment lagger and leader
+            lagger = lagger.next;
+            leader = leader.next;
         }
         //return the list - all negs should have been reassigned
         return this;
-      }
+    }
+
+    getSecondToLastNode() {
+        if (this.isEmpty()) return null;
+
+        let runner = this.head;
+
+        while (runner.next.next != null) {
+            runner = runner.next;
+        }
+
+        return runner;
+    }
+
+    getLastNode() {
+        if (this.isEmpty()) return null;
+
+        let runner = this.head;
+
+        while (runner.next != null) {
+            runner = runner.next;
+        }
+
+        return runner;
+    }
 }
 
 var t1 = new SinglyLinkedList();
-var seeder = [0,-1,3,4,-2];
+var seeder = [0, -1, 3, 4, -2];
 t1.seedFromArr(seeder);
-console.log("***************BEFORE*****************");
+console.log("***************BEFORE1*****************");
 console.log(t1);
 t1.removeNegatives();
-console.log("***************AFTER*****************");
+console.log("***************AFTER1*****************");
 console.log(t1);
+
+// has loop test case
+var sllArr = [3, 5, -2, 3, -7, 9, 1, 0 - 2, 8];
+const sll = new SinglyLinkedList();
+sll.seedFromArr(sllArr);
+var secondToLastNode = sll.getSecondToLastNode();
+var lastNode = sll.getLastNode();
+lastNode.next = secondToLastNode;
+console.log("*************** HAS LOOP (expect true) *****************");
+console.log(sll.hasLoop());
+
+// remove Negatives Test Case
+var sllArr2 = [-4, -2, 3, 5, -2, 9, 1, 0 - 2, 8];
+const sll2 = new SinglyLinkedList();
+sll2.seedFromArr(sllArr2);
+console.log("***************BEFORE2*****************");
+console.log(sll2);
+sll2.removeNegatives();
+console.log("***************AFTER2*****************");
+console.log(sll2);
