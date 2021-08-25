@@ -10,7 +10,7 @@ class MinHeap {
     //        /\   /\
     //       8  7 5  6
     constructor() {
-        this.heap = [];
+        this.heap = [null];
     }
 
     getMin() {
@@ -18,20 +18,26 @@ class MinHeap {
     }
 
     insert(num) {
-        this.heap.push(num);
-        var insertedValueIndex = this.heap.length - 1;
-        
-        
-        while(this.heap[(Math.floor(insertedIndex/2))] != null) {
+        // 1. PUSH THE VALUE INTO THE ARRAY
+        this.heap[this.heap.length] = num; 
+        let newValIndex = this.heap.length-1; 
+        //console.log(heapLength);
 
-            var insertedValueParentIndex = Math.floor(insertedIndex/2)
-            
-            if(this.heap[insertedValueParentIndex] > this.heap[insertedValueIndex]){
-                [this.heap[insertedValueIndex], this.heap[insertedValueParentIndex]] = [this.heap[insertedValueParentIndex], this.heap[insertedValueIndex]];
+        // 2. CHECK FOR PARENT VALUES
+        while((Math.floor(newValIndex/2)) != 0){
+            let parentIndex = Math.floor(newValIndex/2);
+            //3. Is it Greater or Smaller
+            if(this.heap[newValIndex] < this.heap[parentIndex]){
+                // 4. SWAP IF NECESSARY
+                let temp = this.heap[parentIndex];
+                this.heap[parentIndex] = this.heap[newValIndex];
+                this.heap[newValIndex] = temp;
+                newValIndex = parentIndex;
+            } else {
+                return this;
             }
-            insertedValueIndex = insertedValueParentIndex;
         }
-        
+        return this;
     }
 }
 
@@ -42,4 +48,6 @@ var seeder = [null, 1, 3, 4, 8, 7, 5, 6];
 heapOne.heap = seeder;
 console.log(heapOne);
 console.log("Minimum:",heapOne.getMin());
+heapOne.insert(0);
+console.log(heapOne);
 
