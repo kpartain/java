@@ -84,7 +84,7 @@ class MinHeap {
 // console.log(heapOne);
 
 var heapTwo = new MinHeap();
-var seeder2 = [null, 1, 3, 4, 8, 7, 5, 6];
+var seeder2 = [null, 20, 30, 40];
 heapTwo.heap = seeder2;
 console.log("ORIGINAL\n",heapTwo);
 console.log("Min found", heapTwo.extract());
